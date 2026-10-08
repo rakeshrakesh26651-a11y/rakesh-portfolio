@@ -80,7 +80,7 @@ export function Preloader({ onComplete }: PreloaderProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 99999,
-        backgroundColor: '#000000',
+        backgroundColor: '#0B0B0B',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

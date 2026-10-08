@@ -1,11 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData, socialLinks } from '@/data/portfolioData';
 import { MagneticLink } from '@/components/ui/MagneticLink';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function Footer() {
   const { footerNavigation, siteInfo } = portfolioData;
+
+  const footerRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+  const brandTextRef = useRef<HTMLSpanElement>(null);
+  const roleRef = useRef<HTMLSpanElement>(null);
+  const bioRef = useRef<HTMLParagraphElement>(null);
+  const bottomRowRef = useRef<HTMLDivElement>(null);
 
   const activeSocials = [
     { label: 'Instagram', href: socialLinks.instagram },
@@ -14,8 +25,130 @@ export function Footer() {
     { label: 'WhatsApp', href: socialLinks.whatsapp },
   ].filter((item) => Boolean(item.href && item.href.trim().length > 0));
 
+  useEffect(() => {
+    if (!footerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      const isMobile = window.innerWidth <= 809.98;
+
+      // 1. Navigation links: masked upward reveal with stagger
+      if (navRef.current) {
+        const navLinks = navRef.current.querySelectorAll('.footer-nav-link');
+        gsap.fromTo(
+          navLinks,
+          {
+            yPercent: 120,
+            opacity: 0,
+          },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.08,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: navRef.current,
+              start: isMobile ? 'top 92%' : 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 2. Large Brand Text (RAKESH):
+      // Horizontal cinematic movement across/into viewport scrubbed to scrolling
+      if (brandTextRef.current) {
+        const moveDistance = isMobile ? 45 : 85;
+        gsap.fromTo(
+          brandTextRef.current,
+          {
+            x: -moveDistance,
+            opacity: 0,
+            filter: 'blur(6px)',
+          },
+          {
+            x: 0,
+            opacity: 1,
+            filter: 'blur(0px)',
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: footerRef.current,
+              start: isMobile ? 'top 88%' : 'top 82%',
+              end: isMobile ? 'bottom 95%' : 'bottom 90%',
+              scrub: 1.2,
+            },
+          }
+        );
+      }
+
+      // 3. Role & Bio text reveal
+      if (roleRef.current && bioRef.current) {
+        gsap.fromTo(
+          [roleRef.current, bioRef.current],
+          {
+            y: 20,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: brandTextRef.current || footerRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 4. Bottom metadata & social links: reveal last
+      if (bottomRowRef.current) {
+        gsap.fromTo(
+          bottomRowRef.current,
+          {
+            y: 24,
+            opacity: 0,
+            clipPath: 'inset(20% 0% 0% 0%)',
+          },
+          {
+            y: 0,
+            opacity: 1,
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 0.85,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: bottomRowRef.current,
+              start: 'top 95%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // Refresh ScrollTrigger coordinates after mounting to synchronize with Lenis
+      const refreshTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
+
+      return () => {
+        clearTimeout(refreshTimer);
+      };
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <footer id="footer" className="site-footer">
+    <footer id="footer" ref={footerRef} className="site-footer">
       <div
         className="site-container"
         style={{
@@ -27,10 +160,14 @@ export function Footer() {
           flex: 1,
         }}
       >
-        {/* Centered Navigation Links matching original typography */}
-        <div className="footer-nav-menu">
+        {/* Centered Navigation Links with masked container */}
+        <div ref={navRef} className="footer-nav-menu">
           {footerNavigation.map((link) => (
-            <div key={link.label}>
+            <div
+              key={link.label}
+              className="footer-nav-item"
+              style={{ overflow: 'hidden' }}
+            >
               <MagneticLink
                 href={link.href}
                 className="footer-nav-link"
@@ -40,6 +177,7 @@ export function Footer() {
                   color: 'var(--color-white)',
                   letterSpacing: '0.02em',
                   textTransform: 'uppercase',
+                  display: 'inline-block',
                 }}
               >
                 {link.label}
@@ -57,30 +195,46 @@ export function Footer() {
             textAlign: 'center',
             gap: '8px',
             marginBottom: '24px',
+            overflow: 'hidden',
           }}
         >
-          <span
+          <div
             style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: '22px',
-              color: 'var(--color-white)',
-              letterSpacing: '0.05em',
+              overflow: 'hidden',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
-            {siteInfo.name}
-          </span>
+            <span
+              ref={brandTextRef}
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(28px, 4vw, 44px)',
+                color: 'var(--color-white)',
+                letterSpacing: '0.05em',
+                display: 'inline-block',
+                willChange: 'transform, filter, opacity',
+              }}
+            >
+              {siteInfo.name}
+            </span>
+          </div>
           <span
+            ref={roleRef}
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '14px',
               color: 'var(--color-secondary)',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
+              display: 'inline-block',
             }}
           >
             {siteInfo.role}
           </span>
           <p
+            ref={bioRef}
             className="text-mono-sm"
             style={{
               color: 'var(--color-muted)',
@@ -94,8 +248,8 @@ export function Footer() {
         </div>
 
         {/* Bottom Metadata & Socials */}
-        <div className="footer-bottom-row">
-          {/* Left Column: Socials (hidden if empty) + Copyright */}
+        <div ref={bottomRowRef} className="footer-bottom-row">
+          {/* Left Column: Socials + Copyright */}
           <div className="footer-left-col">
             {activeSocials.length > 0 && (
               <div className="footer-socials-row">
@@ -137,21 +291,16 @@ export function Footer() {
 
       <style jsx>{`
         .site-footer {
-          position: fixed;
-          bottom: 0;
-          left: 0;
+          position: relative;
+          z-index: 2;
           width: 100%;
-          height: var(--footer-height);
-          background-color: #000000;
-          background-image: var(--bg-vignette);
-          background-attachment: fixed;
-          background-size: 100vw 100vh;
-          background-repeat: no-repeat;
-          z-index: 1;
+          min-height: 520px;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 48px 16px 24px;
+          padding: 80px 16px 36px;
+          background-color: transparent !important;
+          overflow: hidden;
         }
 
         .footer-nav-menu {
@@ -197,11 +346,9 @@ export function Footer() {
 
         @media (max-width: 809.98px) {
           .site-footer {
-            position: relative;
-            z-index: 3;
-            height: auto;
+            min-height: auto;
             margin-top: -16px;
-            padding: 0 16px 24px;
+            padding: 24px 16px 32px;
           }
 
           .footer-nav-menu {

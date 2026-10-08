@@ -78,7 +78,7 @@ export function ContactSection() {
           {
             yPercent: 0,
             opacity: 1,
-            duration: 1.05,
+            duration: 1.1,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headingRef.current,
@@ -89,19 +89,19 @@ export function ContactSection() {
         );
       }
 
-      // 3. Subtext
+      // 3. Subtext reveals slightly after heading
       if (subtextRef.current) {
         gsap.fromTo(
           subtextRef.current,
-          { y: 20, opacity: 0 },
+          { y: 24, opacity: 0 },
           {
             y: 0,
             opacity: 1,
             duration: 0.85,
-            delay: 0.1,
+            delay: 0.15,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: subtextRef.current,
+              trigger: headingRef.current,
               start: 'top 85%',
               toggleActions: 'play none none none',
             },
@@ -109,17 +109,18 @@ export function ContactSection() {
         );
       }
 
-      // 4. Contact Cards stagger
+      // 4. Contact Cards reveal upward one-by-one with clip-path stagger
       if (cardsRef.current) {
         const cards = cardsRef.current.querySelectorAll('.contact-option-card');
         gsap.fromTo(
           cards,
-          { y: 35, opacity: 0 },
+          { y: 40, opacity: 0, clipPath: 'inset(18% 0% 0% 0%)' },
           {
             y: 0,
             opacity: 1,
-            duration: 0.9,
-            stagger: 0.12,
+            clipPath: 'inset(0% 0% 0% 0%)',
+            duration: 0.95,
+            stagger: 0.14,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: cardsRef.current,

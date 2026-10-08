@@ -57,7 +57,7 @@ export default function Home() {
           position: 'relative',
           zIndex: 2,
           overflow: 'hidden',
-          marginBottom: 'var(--footer-height)',
+          marginBottom: 0,
         }}
       >
         <Hero />
