@@ -56,6 +56,11 @@ export function Preloader({ onComplete }: PreloaderProps) {
         yPercent: -100,
         duration: 1.1,
         ease: 'power4.inOut',
+        onStart: () => {
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('preloaderLift'));
+          }
+        },
       });
 
     return () => {

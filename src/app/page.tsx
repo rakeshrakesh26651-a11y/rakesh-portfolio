@@ -23,8 +23,6 @@ export default function Home() {
         style={{
           position: 'relative',
           zIndex: 2,
-          backgroundColor: '#000000',
-          boxShadow: '0 40px 80px rgba(0, 0, 0, 0.9)',
           overflow: 'hidden',
           marginBottom: 'var(--footer-height)',
         }}

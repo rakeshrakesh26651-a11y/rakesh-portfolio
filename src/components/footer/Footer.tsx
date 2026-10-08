@@ -15,23 +15,7 @@ export function Footer() {
   ].filter((item) => Boolean(item.href && item.href.trim().length > 0));
 
   return (
-    <footer
-      id="footer"
-      className="site-footer"
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: 'var(--footer-height)',
-        backgroundColor: '#000000',
-        zIndex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: '48px 16px 24px',
-      }}
-    >
+    <footer id="footer" className="site-footer">
       <div
         className="site-container"
         style={{
@@ -152,6 +136,24 @@ export function Footer() {
       </div>
 
       <style jsx>{`
+        .site-footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: var(--footer-height);
+          background-color: #000000;
+          background-image: var(--bg-vignette);
+          background-attachment: fixed;
+          background-size: 100vw 100vh;
+          background-repeat: no-repeat;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 48px 16px 24px;
+        }
+
         .footer-nav-menu {
           display: flex;
           flex-direction: column;
@@ -194,6 +196,19 @@ export function Footer() {
         }
 
         @media (max-width: 809.98px) {
+          .site-footer {
+            position: relative;
+            z-index: 3;
+            height: auto;
+            margin-top: -16px;
+            padding: 0 16px 24px;
+          }
+
+          .footer-nav-menu {
+            margin-top: 0;
+            margin-bottom: 24px;
+          }
+
           :global(.footer-nav-link) {
             font-size: 22px !important;
             line-height: 26px !important;

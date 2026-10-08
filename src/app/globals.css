@@ -14,10 +14,11 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --color-bg: #000000;
+  --bg-vignette: radial-gradient(ellipse 90% 70% at 50% 35%, #080808 0%, #040404 60%, #000000 100%);
   --color-white: #ffffff;
   --color-muted: #a1a1a1;
   --color-secondary: #d4d4d4;
-  --color-surface: #0a0a0a;
+  --color-surface: #000000;
   --color-border: rgba(245, 245, 245, 0.2);
   --color-border-subtle: rgba(245, 241, 235, 0.12);
   
@@ -28,7 +29,7 @@
 
 @media (max-width: 809.98px) {
   :root {
-    --footer-height: 434px;
+    --footer-height: 0px;
   }
 }
 
@@ -39,7 +40,12 @@
 }
 
 html {
-  background-color: var(--color-bg);
+  color-scheme: dark;
+  background-color: #000000;
+  background-image: var(--bg-vignette);
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
   color: var(--color-white);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -50,11 +56,29 @@ html {
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: #000000;
+  background-image: var(--bg-vignette);
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
   color: var(--color-white);
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
+}
+
+main,
+.site-footer {
+  background-color: #000000;
+  background-image: var(--bg-vignette);
+  background-attachment: fixed;
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+}
+
+section,
+.hero-section {
+  background-color: transparent !important;
 }
 
 ::selection {
@@ -128,8 +152,8 @@ a {
   pointer-events: none;
   background-image: url('/images/noise.png');
   background-repeat: repeat;
-  background-size: 256px 256px;
-  opacity: 0.035;
+  background-size: 160px 160px;
+  opacity: 0.075;
   z-index: 9999;
 }
 

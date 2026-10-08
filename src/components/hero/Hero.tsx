@@ -1,16 +1,167 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useLayoutEffect, useEffect } from 'react';
+import gsap from 'gsap';
 import { portfolioData } from '@/data/portfolioData';
 import { HeroCarousel3D } from './HeroCarousel3D';
 import { MagneticLink } from '@/components/ui/MagneticLink';
 
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+
+const taglineGroups = [
+  'I design and build modern, high-performance websites',
+  'and digital experiences that help businesses stand out,',
+  'build trust, and grow online.',
+];
+
 export function Hero() {
   const { siteInfo } = portfolioData;
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const roleRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const ctasRef = useRef<HTMLDivElement>(null);
+
+  useIsomorphicLayoutEffect(() => {
+    let cleanupLiftListener: (() => void) | undefined;
+
+    const ctx = gsap.context(() => {
+      const runEntrance = (baseDelay = 0) => {
+        const tl = gsap.timeline();
+
+        // Initial states
+        if (titleRef.current) {
+          gsap.set(titleRef.current, {
+            yPercent: 100,
+            y: 0,
+            opacity: 0,
+            filter: 'blur(6px)',
+          });
+        }
+        if (roleRef.current) {
+          gsap.set(roleRef.current, {
+            y: 20,
+            opacity: 0,
+          });
+        }
+        gsap.set('.hero-desc-group', {
+          y: 20,
+          opacity: 0,
+        });
+        gsap.set('.hero-cta-item', {
+          y: 16,
+          opacity: 0,
+        });
+
+        // RAKESH: masked overflow-hidden reveal
+        // translateY(100%) -> 0, opacity 0 -> 1, blur(6px) -> 0, duration ~1.1s, ease: power4.out, delay ~0.2s
+        if (titleRef.current) {
+          tl.to(
+            titleRef.current,
+            {
+              yPercent: 0,
+              y: 0,
+              opacity: 1,
+              filter: 'blur(0px)',
+              duration: 1.1,
+              ease: 'power4.out',
+            },
+            baseDelay + 0.2
+          );
+        }
+
+        // Subtitle: translateY(20px) -> 0, opacity 0 -> 1, delay ~0.6s
+        if (roleRef.current) {
+          tl.to(
+            roleRef.current,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+            baseDelay + 0.6
+          );
+        }
+
+        // Description: line/group stagger reveal, translateY(20px) -> 0, opacity 0 -> 1
+        const descGroups = descRef.current?.querySelectorAll('.hero-desc-group');
+        if (descGroups && descGroups.length > 0) {
+          tl.to(
+            descGroups,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.12,
+              ease: 'power3.out',
+            },
+            baseDelay + 0.8
+          );
+        } else if (descRef.current) {
+          tl.to(
+            descRef.current,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+            baseDelay + 0.8
+          );
+        }
+
+        // CTAs: subtle translateY + fade, slight stagger
+        const ctaItems = ctasRef.current?.querySelectorAll('.hero-cta-item');
+        if (ctaItems && ctaItems.length > 0) {
+          tl.to(
+            ctaItems,
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              stagger: 0.12,
+              ease: 'power3.out',
+            },
+            baseDelay + 1.05
+          );
+        }
+      };
+
+      // Check if Preloader is actively in the DOM
+      const preloaderActive = Boolean(document.querySelector('.preloader-char'));
+      if (preloaderActive) {
+        let started = false;
+        const onLift = () => {
+          if (started) return;
+          started = true;
+          runEntrance(0);
+        };
+
+        window.addEventListener('preloaderLift', onLift, { once: true });
+        const timer = setTimeout(onLift, 1350);
+
+        cleanupLiftListener = () => {
+          window.removeEventListener('preloaderLift', onLift);
+          clearTimeout(timer);
+        };
+      } else {
+        runEntrance(0);
+      }
+    }, sectionRef);
+
+    return () => {
+      cleanupLiftListener?.();
+      ctx.revert();
+    };
+  }, []);
 
   return (
     <section
       id="hero"
+      ref={sectionRef}
       className="hero-section"
       style={{
         position: 'relative',
@@ -36,24 +187,42 @@ export function Hero() {
       >
         {/* Title Group */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-          <h1
-            className="hero-title"
+          {/* Masked Title Wrapper */}
+          <div
+            className="hero-title-mask"
             style={{
-              fontFamily: 'var(--font-serif)',
-              fontWeight: 400,
-              color: 'var(--color-white)',
-              textAlign: 'center',
-              margin: 0,
+              overflow: 'hidden',
               width: '100%',
-              textTransform: 'uppercase',
-              userSelect: 'none',
-              letterSpacing: '0em',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '8px',
+              marginBottom: '-8px',
             }}
           >
-            {siteInfo.name}
-          </h1>
+            <h1
+              ref={titleRef}
+              className="hero-title"
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontWeight: 400,
+                color: 'var(--color-white)',
+                textAlign: 'center',
+                margin: 0,
+                width: '100%',
+                textTransform: 'uppercase',
+                userSelect: 'none',
+                letterSpacing: '0em',
+                opacity: 0,
+                filter: 'blur(6px)',
+                willChange: 'transform, opacity, filter',
+              }}
+            >
+              {siteInfo.name}
+            </h1>
+          </div>
 
           <div
+            ref={roleRef}
             className="hero-role"
             style={{
               fontFamily: 'var(--font-mono)',
@@ -63,12 +232,15 @@ export function Hero() {
               color: 'var(--color-white)',
               marginTop: '12px',
               fontWeight: 500,
+              opacity: 0,
+              willChange: 'transform, opacity',
             }}
           >
             {siteInfo.role}
           </div>
 
           <p
+            ref={descRef}
             className="hero-subtitle"
             style={{
               fontFamily: 'var(--font-mono)',
@@ -80,11 +252,25 @@ export function Hero() {
               whiteSpace: 'normal',
             }}
           >
-            {siteInfo.tagline}
+            {taglineGroups.map((group, idx) => (
+              <span
+                key={idx}
+                className="hero-desc-group"
+                style={{
+                  display: 'inline-block',
+                  opacity: 0,
+                  willChange: 'transform, opacity',
+                  marginRight: idx < taglineGroups.length - 1 ? '0.3em' : undefined,
+                }}
+              >
+                {group}
+              </span>
+            ))}
           </p>
 
           {/* Action CTAs */}
           <div
+            ref={ctasRef}
             className="hero-ctas"
             style={{
               display: 'flex',
@@ -94,27 +280,43 @@ export function Hero() {
               justifyContent: 'center',
             }}
           >
-            <MagneticLink
-              href="#contact"
+            <div
+              className="hero-cta-item"
               style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '15px',
-                fontWeight: 500,
-                color: 'var(--color-white)',
+                opacity: 0,
+                willChange: 'transform, opacity',
               }}
             >
-              Start a Project
-            </MagneticLink>
-            <MagneticLink
-              href="#work"
+              <MagneticLink
+                href="#contact"
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  color: 'var(--color-white)',
+                }}
+              >
+                Start a Project
+              </MagneticLink>
+            </div>
+            <div
+              className="hero-cta-item"
               style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '15px',
-                color: 'var(--color-muted)',
+                opacity: 0,
+                willChange: 'transform, opacity',
               }}
             >
-              View My Work
-            </MagneticLink>
+              <MagneticLink
+                href="#work"
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '15px',
+                  color: 'var(--color-muted)',
+                }}
+              >
+                View My Work
+              </MagneticLink>
+            </div>
           </div>
         </div>
 
