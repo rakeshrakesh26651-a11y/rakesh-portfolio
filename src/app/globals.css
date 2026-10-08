@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700;1,900&family=Roboto+Mono:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap');
+
+@font-face {
+  font-family: 'Gambarino';
+  src: url('/fonts/Gambarino-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-serif: 'Gambarino', 'Gambarino Placeholder', Georgia, serif;
+  --font-mono: 'Roboto Mono', 'Roboto Mono Placeholder', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --color-bg: #000000;
+  --color-white: #ffffff;
+  --color-muted: #a1a1a1;
+  --color-secondary: #d4d4d4;
+  --color-surface: #0a0a0a;
+  --color-border: rgba(245, 245, 245, 0.2);
+  --color-border-subtle: rgba(245, 241, 235, 0.12);
+  
+  --max-width: 1440px;
+  --page-padding: 16px;
+  --footer-height: 634px;
+}
+
+@media (max-width: 809.98px) {
+  :root {
+    --footer-height: 434px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Typography Utility Presets matching reference */
+.font-display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Base text preset matching framer-styles-preset-1esc0nj */
+.text-mono-base {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.2em;
+  color: var(--color-muted);
+}
+
+/* Small text preset matching framer-styles-preset-9f17rv */
+.text-mono-sm {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.2em;
+  color: var(--color-muted);
+}
+
+/* Section heading preset matching framer-styles-preset-6af9te */
+.heading-section {
+  font-family: var(--font-serif);
+  font-size: 60px;
+  line-height: 1.2em;
+  font-weight: 400;
+  color: var(--color-white);
+  letter-spacing: 0em;
+}
+
+@media (max-width: 809.98px) {
+  .heading-section {
+    font-size: 46px;
+    line-height: 1.2em;
+  }
+  .text-mono-base {
+    font-size: 16px;
+    line-height: 1.2em;
+  }
+}
+
+/* Grain fixed overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: url('/images/noise.png');
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  opacity: 0.035;
+  z-index: 9999;
+}
+
+/* Underline slide link */
+.sliding-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sliding-link .link-line {
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-white);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.sliding-link:hover .link-line {
+  transform: translateX(100%);
+}
+
+/* Divider lines */
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+/* Container constraints */
+.site-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--page-padding);
+  padding-right: var(--page-padding);
+}

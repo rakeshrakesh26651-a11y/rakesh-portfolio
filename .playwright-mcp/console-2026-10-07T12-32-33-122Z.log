@@ -1,0 +1,2 @@
+[     155ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  362411ms] [INFO] Launched external handler for 'mailto:rakesh@example.com?subject=New%20Project%20Inquiry'. @ http://localhost:3000/#contact:0

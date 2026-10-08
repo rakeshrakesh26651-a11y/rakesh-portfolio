@@ -1,0 +1,259 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - heading "P A T R I C K J A N E" [level=1]:
+                    - generic:
+                      - generic: P
+                      - generic: A
+                      - generic: T
+                      - generic: R
+                      - generic: I
+                      - generic: C
+                      - generic: K
+                    - generic:
+                      - generic: J
+                      - generic: A
+                      - generic: "N"
+                      - generic: E
+      - main [ref=e5]:
+        - generic [ref=e9]:
+          - generic [ref=e11]:
+            - heading "PATRICK JANE" [level=1]
+          - generic [ref=e12]:
+            - paragraph: I turn ambitious ideas into bold visual worlds that connect, inspire and stay remembered.
+        - generic [ref=e34]:
+          - generic [ref=e41]:
+            - heading "Selected Works" [level=2] [ref=e43]
+            - paragraph [ref=e45]: A collection of identities, visual systems and experimental directions created across culture, fashion and contemporary design.
+          - generic [ref=e46]:
+            - generic [ref=e47]:
+              - link [ref=e49] [cursor=pointer]:
+                - /url: ./projects/shadow-archive
+                - heading "Shadow Archive" [level=4] [ref=e59]
+              - link [ref=e61] [cursor=pointer]:
+                - /url: ./projects/match-point
+                - heading "MATCH POINT" [level=4] [ref=e71]
+            - link [ref=e74] [cursor=pointer]:
+              - /url: ./projects/type-specimen-system
+              - heading "Type Specimen System" [level=4] [ref=e84]
+            - generic [ref=e85]:
+              - link [ref=e87] [cursor=pointer]:
+                - /url: ./projects/nocturne-heart
+                - heading "Nocturne Heart" [level=4] [ref=e97]
+              - generic [ref=e98]:
+                - link [ref=e99] [cursor=pointer]:
+                  - /url: ./projects/cutform-portraits
+                  - heading "Cutform Portraits" [level=4] [ref=e109]
+                - link [ref=e113] [cursor=pointer]:
+                  - /url: ./projects
+                  - paragraph [ref=e116]: Explore More
+        - generic [ref=e124]:
+          - generic [ref=e128]:
+            - generic [ref=e129]: I design digital experiences that balance
+            - generic [ref=e131]: clarity, emotion and purpose. Every project is
+            - generic [ref=e133]: approached with curiosity, thoughtful
+            - generic [ref=e135]: craftsmanship and a focus on creating work that
+            - generic [ref=e137]: feels as intuitive as it is enduring.
+          - generic [ref=e146]:
+            - generic [ref=e147]:
+              - paragraph [ref=e149]: Outside of work, I spend time exploring places that help me slow down and recharge. Whether it's walking through quiet forests, watching the ocean at sunrise, visiting galleries or getting lost in a good book, I enjoy experiences that bring perspective. These moments of stillness often become the inspiration behind the ideas I create.
+              - paragraph [ref=e151]: I believe thoughtful design begins with thoughtful living. Curiosity, observation and continuous learning shape the way I approach both work and life. Every conversation, journey and experience adds a new layer to my perspective, allowing me to create digital experiences that feel genuine, timeless and deeply connected to the people who use them.
+            - link [ref=e155] [cursor=pointer]:
+              - /url: https://cal.com
+              - paragraph [ref=e158]: Let's Talk
+        - generic [ref=e161]:
+          - heading "EXPERTISE & SERVICES" [level=2] [ref=e169]
+          - generic [ref=e173]:
+            - generic [ref=e177]:
+              - paragraph [ref=e179]: WEB DESIGN
+              - paragraph [ref=e181]: "01"
+            - generic [ref=e187]:
+              - paragraph [ref=e189]: DIGITAL STRATEGY
+              - paragraph [ref=e191]: "02"
+            - generic [ref=e197]:
+              - paragraph [ref=e199]: INTERACTION DESIGN
+              - paragraph [ref=e201]: "03"
+            - generic [ref=e207]:
+              - paragraph [ref=e209]: BRAND EXPERIENCES
+              - paragraph [ref=e211]: "04"
+            - generic [ref=e217]:
+              - paragraph [ref=e219]: CREATIVE DIRECTION
+              - paragraph [ref=e221]: "05"
+        - generic [ref=e226]:
+          - heading "Awards & Recognitions" [level=2] [ref=e234]
+          - generic [ref=e235]:
+            - generic [ref=e236]:
+              - generic [ref=e237]:
+                - heading "YEAR" [level=5] [ref=e239]
+                - heading "PROJECT" [level=5] [ref=e241]
+                - heading "AWARD" [level=5] [ref=e243]
+              - generic [ref=e249]:
+                - generic [ref=e250]:
+                  - paragraph [ref=e252]: "2026"
+                  - paragraph [ref=e254]: Aurora Studio
+                  - paragraph [ref=e256]: Site of the Day – Digital Excellence Awards
+                - generic [ref=e257]:
+                  - paragraph [ref=e259]: "2025"
+                  - paragraph [ref=e261]: Atelier North
+                  - paragraph [ref=e263]: Gold – Digital Craft Awards
+                - generic [ref=e264]:
+                  - paragraph [ref=e266]: "2025"
+                  - paragraph [ref=e268]: Solis Exganzo
+                  - paragraph [ref=e270]: Best User Experience – Web Vision Awards
+                - generic [ref=e271]:
+                  - paragraph [ref=e273]: "2025"
+                  - paragraph [ref=e275]: Quiet Studio
+                  - paragraph [ref=e277]: Best Creative Direction – Motion Guild
+                - generic [ref=e278]:
+                  - paragraph [ref=e280]: "2024"
+                  - paragraph [ref=e282]: Meridian & Co.
+                  - paragraph [ref=e284]: Best Visual Identity – Creative Honors
+                - generic [ref=e285]:
+                  - paragraph [ref=e287]: "2023"
+                  - paragraph [ref=e289]: Forma Studio
+                  - paragraph [ref=e291]: Best Independent Portfolio – Creative Network
+            - generic [ref=e292]:
+              - generic [ref=e293]:
+                - generic [ref=e295]:
+                  - generic [ref=e296]:
+                    - generic [ref=e298]:
+                      - generic [ref=e299]: "0"
+                      - generic [ref=e300]: "1"
+                      - generic [ref=e301]: "2"
+                      - generic [ref=e302]: "3"
+                      - generic [ref=e303]: "4"
+                      - generic [ref=e304]: "5"
+                      - generic [ref=e305]: "6"
+                      - generic [ref=e306]: "7"
+                      - generic [ref=e307]: "8"
+                      - generic [ref=e308]: "9"
+                    - generic [ref=e310]:
+                      - generic [ref=e311]: "0"
+                      - generic [ref=e312]: "1"
+                      - generic [ref=e313]: "2"
+                      - generic [ref=e314]: "3"
+                      - generic [ref=e315]: "4"
+                      - generic [ref=e316]: "5"
+                      - generic [ref=e317]: "6"
+                      - generic [ref=e318]: "7"
+                      - generic [ref=e319]: "8"
+                      - generic [ref=e320]: "9"
+                  - generic [ref=e321]: +
+                - paragraph [ref=e323]: Selected Clients
+              - generic [ref=e324]:
+                - generic [ref=e327]:
+                  - generic [ref=e329]:
+                    - generic [ref=e330]: "0"
+                    - generic [ref=e331]: "1"
+                    - generic [ref=e332]: "2"
+                    - generic [ref=e333]: "3"
+                    - generic [ref=e334]: "4"
+                    - generic [ref=e335]: "5"
+                    - generic [ref=e336]: "6"
+                    - generic [ref=e337]: "7"
+                    - generic [ref=e338]: "8"
+                    - generic [ref=e339]: "9"
+                  - generic [ref=e341]:
+                    - generic [ref=e342]: "0"
+                    - generic [ref=e343]: "1"
+                    - generic [ref=e344]: "2"
+                    - generic [ref=e345]: "3"
+                    - generic [ref=e346]: "4"
+                    - generic [ref=e347]: "5"
+                    - generic [ref=e348]: "6"
+                    - generic [ref=e349]: "7"
+                    - generic [ref=e350]: "8"
+                    - generic [ref=e351]: "9"
+                - paragraph [ref=e353]: Projects Delivered
+              - generic [ref=e354]:
+                - generic [ref=e356]:
+                  - generic [ref=e357]:
+                    - generic [ref=e359]:
+                      - generic [ref=e360]: "0"
+                      - generic [ref=e361]: "1"
+                      - generic [ref=e362]: "2"
+                      - generic [ref=e363]: "3"
+                      - generic [ref=e364]: "4"
+                      - generic [ref=e365]: "5"
+                      - generic [ref=e366]: "6"
+                      - generic [ref=e367]: "7"
+                      - generic [ref=e368]: "8"
+                      - generic [ref=e369]: "9"
+                    - generic [ref=e371]:
+                      - generic [ref=e372]: "0"
+                      - generic [ref=e373]: "1"
+                      - generic [ref=e374]: "2"
+                      - generic [ref=e375]: "3"
+                      - generic [ref=e376]: "4"
+                      - generic [ref=e377]: "5"
+                      - generic [ref=e378]: "6"
+                      - generic [ref=e379]: "7"
+                      - generic [ref=e380]: "8"
+                      - generic [ref=e381]: "9"
+                  - generic [ref=e382]: +
+                - paragraph [ref=e384]: Years of Experience
+    - navigation [ref=e388]:
+      - generic [ref=e389]:
+        - paragraph [ref=e392]:
+          - link "PATRICK JANE" [ref=e393] [cursor=pointer]:
+            - /url: ./
+        - generic [ref=e394]:
+          - paragraph [ref=e396]: Independent Studio
+          - paragraph [ref=e398]: 10:08 AM
+        - generic [ref=e399]:
+          - paragraph [ref=e401]: Project Inquiries
+          - link [ref=e403] [cursor=pointer]:
+            - /url: mailto:hello@patrickjane.studio
+            - paragraph [ref=e406]: hello@patrickjane.studio
+        - link [ref=e409] [cursor=pointer]:
+          - /url: https://cal.com
+          - paragraph [ref=e412]: Contact
+    - generic [ref=e415]:
+      - generic [ref=e428]:
+        - link [ref=e432] [cursor=pointer]:
+          - /url: ./projects
+          - heading "WORK" [level=3] [ref=e434]
+        - link [ref=e439] [cursor=pointer]:
+          - /url: ./#about
+          - heading "ABOUT" [level=3] [ref=e441]
+        - link [ref=e446] [cursor=pointer]:
+          - /url: https://cal.com
+          - heading "CONTACT US" [level=3] [ref=e448]
+      - generic [ref=e450]:
+        - generic [ref=e451]:
+          - generic [ref=e452]:
+            - link [ref=e456] [cursor=pointer]:
+              - /url: https://www.instagram.com
+              - heading "IG" [level=4] [ref=e458]
+            - link [ref=e462] [cursor=pointer]:
+              - /url: https://x.com/AveshMishra16
+              - heading "X" [level=4] [ref=e464]
+            - link [ref=e468] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/avesh-mishra/
+              - heading "LI" [level=4] [ref=e470]
+            - link [ref=e474] [cursor=pointer]:
+              - /url: https://www.awwwards.com
+              - heading "AW" [level=4] [ref=e476]
+          - paragraph [ref=e478]: © 2026 Patrick Studio. All rights reserved.
+        - paragraph [ref=e481]:
+          - text: Made by
+          - link "Avesh Mishra" [ref=e482] [cursor=pointer]:
+            - /url: https://www.framer.com/@aveshmishra/
+        - paragraph [ref=e485]:
+          - text: Made in
+          - link "Framer" [ref=e486] [cursor=pointer]:
+            - /url: https://www.framer.com
+    - button [ref=e491]:
+      - img "Quomi Screen on a desktop" [ref=e495]
+      - link [ref=e497] [cursor=pointer]:
+        - /url: https://framer.link/F31FrhO
+        - paragraph [ref=e499]: Remix for FREE
+  - link [ref=e503] [cursor=pointer]:
+    - /url: https://www.framer.com
+    - paragraph [ref=e508]: Create a free website with Framer, the website builder loved by startups, designers and agencies.

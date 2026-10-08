@@ -1,0 +1,1151 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "nav": {
+    "container": {
+      "rect": {
+        "width": 1440,
+        "height": 74,
+        "top": 0,
+        "left": 0
+      },
+      "padding": "0px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "block",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "brand": {
+      "rect": {
+        "width": 115,
+        "height": 22,
+        "top": 26,
+        "left": 16
+      },
+      "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "19.2px",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    },
+    "locTime": {
+      "rect": {
+        "width": 356,
+        "height": 39,
+        "top": 17,
+        "left": 372
+      },
+      "padding": "0px",
+      "margin": "0px",
+      "gap": "4px",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "timeText": {
+      "rect": {
+        "width": 356,
+        "height": 16,
+        "top": 41,
+        "left": 372
+      },
+      "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "color": "rgb(250, 250, 250)",
+      "textAlign": "start",
+      "textTransform": "none"
+    },
+    "inquiry": {
+      "rect": {
+        "width": 629,
+        "height": 44,
+        "top": 15,
+        "left": 728
+      },
+      "padding": "0px",
+      "margin": "0px",
+      "gap": "4px",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "contactBtn": {
+      "rect": {
+        "width": 67,
+        "height": 24,
+        "top": 25,
+        "left": 1357
+      },
+      "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    }
+  },
+  "hero": {
+    "section": {
+      "rect": {
+        "width": 1440,
+        "height": 900,
+        "top": 0,
+        "left": 0
+      },
+      "padding": "80px 0px 30px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "heading": {
+      "rect": {
+        "width": 1408,
+        "height": 252,
+        "top": 104,
+        "left": 16
+      },
+      "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+      "fontSize": "180px",
+      "fontWeight": "400",
+      "lineHeight": "252px",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "center",
+      "textTransform": "uppercase"
+    },
+    "subtitle": {
+      "rect": {
+        "width": 640,
+        "height": 45,
+        "top": 372,
+        "left": 400
+      },
+      "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "22.4px",
+      "letterSpacing": "normal",
+      "color": "rgb(161, 161, 161)",
+      "textAlign": "center",
+      "textTransform": "none"
+    },
+    "carousel": {
+      "rect": {
+        "width": 1408,
+        "height": 390,
+        "top": 456,
+        "left": 16
+      },
+      "padding": "0px",
+      "margin": "39px 0px 0px",
+      "gap": "normal",
+      "display": "block",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    }
+  },
+  "works": {
+    "section": {
+      "rect": {
+        "width": 1440,
+        "height": 2615,
+        "top": 901,
+        "left": 0
+      },
+      "padding": "48px 0px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "block",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "heading": {
+      "rect": {
+        "width": 380,
+        "height": 72,
+        "top": 949,
+        "left": 16
+      },
+      "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+      "fontSize": "60px",
+      "fontWeight": "400",
+      "lineHeight": "72px",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    },
+    "description": {
+      "rect": {
+        "width": 520,
+        "height": 58,
+        "top": 949,
+        "left": 904
+      },
+      "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "19.2px",
+      "letterSpacing": "normal",
+      "color": "rgb(161, 161, 161)",
+      "textAlign": "start",
+      "textTransform": "none"
+    },
+    "projects": [
+      {
+        "title": "Shadow Archive",
+        "card": {
+          "rect": {
+            "width": 352,
+            "height": 394,
+            "top": 1085,
+            "left": 16
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "imageWrapper": {
+          "rect": {
+            "width": 352,
+            "height": 352,
+            "top": 1085,
+            "left": 16
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "block",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgb(5, 5, 5)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "2px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 352,
+            "height": 26,
+            "top": 1453,
+            "left": 16
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "title": "MATCH POINT",
+        "card": {
+          "rect": {
+            "width": 704,
+            "height": 746,
+            "top": 1085,
+            "left": 720
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "imageWrapper": {
+          "rect": {
+            "width": 704,
+            "height": 704,
+            "top": 1085,
+            "left": 720
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "block",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgb(5, 5, 5)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "2px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 704,
+            "height": 26,
+            "top": 1805,
+            "left": 720
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "title": "Type Specimen System",
+        "card": {
+          "rect": {
+            "width": 704,
+            "height": 746,
+            "top": 1903,
+            "left": 368
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "imageWrapper": {
+          "rect": {
+            "width": 704,
+            "height": 704,
+            "top": 1903,
+            "left": 368
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "block",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgb(5, 5, 5)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "2px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 704,
+            "height": 26,
+            "top": 2623,
+            "left": 368
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "title": "Nocturne Heart",
+        "card": {
+          "rect": {
+            "width": 704,
+            "height": 746,
+            "top": 2722,
+            "left": 16
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "imageWrapper": {
+          "rect": {
+            "width": 704,
+            "height": 704,
+            "top": 2722,
+            "left": 16
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "block",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgb(5, 5, 5)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "2px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 704,
+            "height": 26,
+            "top": 3442,
+            "left": 16
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "title": "Cutform Portraits",
+        "card": {
+          "rect": {
+            "width": 352,
+            "height": 394,
+            "top": 2722,
+            "left": 1072
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "imageWrapper": {
+          "rect": {
+            "width": 352,
+            "height": 352,
+            "top": 2722,
+            "left": 1072
+          },
+          "padding": "0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "block",
+          "flexDirection": "row",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgb(5, 5, 5)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "2px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 352,
+            "height": 26,
+            "top": 3090,
+            "left": 1072
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      }
+    ],
+    "exploreMore": {
+      "rect": {
+        "width": 352,
+        "height": 394,
+        "top": 1085,
+        "left": 16
+      },
+      "fontFamily": "Inter, -apple-system, \"system-ui\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    }
+  },
+  "about": {
+    "section": {
+      "rect": {
+        "width": 1440,
+        "height": 1065,
+        "top": 3517,
+        "left": 0
+      },
+      "padding": "48px 0px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "block",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "statementText": {
+      "rect": {
+        "width": 1408,
+        "height": 70,
+        "top": 3636,
+        "left": 16
+      },
+      "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+      "fontSize": "61.2px",
+      "fontWeight": "400",
+      "lineHeight": "70.38px",
+      "letterSpacing": "-1.53px",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    },
+    "image": {
+      "rect": {
+        "width": 430,
+        "height": 590,
+        "top": 3941,
+        "left": 16
+      },
+      "width": "100%",
+      "height": "110%",
+      "objectFit": "cover"
+    },
+    "paras": [
+      {
+        "rect": {
+          "width": 563,
+          "height": 134,
+          "top": 3997,
+          "left": 861
+        },
+        "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "19.2px",
+        "letterSpacing": "normal",
+        "color": "rgb(161, 161, 161)",
+        "textAlign": "start",
+        "textTransform": "none"
+      },
+      {
+        "rect": {
+          "width": 563,
+          "height": 134,
+          "top": 4163,
+          "left": 861
+        },
+        "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+        "fontSize": "16px",
+        "fontWeight": "400",
+        "lineHeight": "19.2px",
+        "letterSpacing": "normal",
+        "color": "rgb(161, 161, 161)",
+        "textAlign": "start",
+        "textTransform": "none"
+      }
+    ],
+    "button": {
+      "rect": {
+        "width": 96,
+        "height": 24,
+        "top": 4338,
+        "left": 861
+      },
+      "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    }
+  },
+  "services": {
+    "section": {
+      "rect": {
+        "width": 1440,
+        "height": 629,
+        "top": 4583,
+        "left": 0
+      },
+      "padding": "48px 0px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "block",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "heading": {
+      "rect": {
+        "width": 650,
+        "height": 72,
+        "top": 4631,
+        "left": 16
+      },
+      "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+      "fontSize": "60px",
+      "fontWeight": "400",
+      "lineHeight": "72px",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "uppercase"
+    },
+    "items": [
+      {
+        "text": "WEB DESIGN01",
+        "box": {
+          "rect": {
+            "width": 929,
+            "height": 83,
+            "top": 4751,
+            "left": 495
+          },
+          "padding": "20px 0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 104,
+            "height": 22,
+            "top": 4771,
+            "left": 495
+          },
+          "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "0.8px",
+          "color": "rgb(161, 161, 161)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "DIGITAL STRATEGY02",
+        "box": {
+          "rect": {
+            "width": 929,
+            "height": 83,
+            "top": 4833,
+            "left": 495
+          },
+          "padding": "20px 0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 166,
+            "height": 22,
+            "top": 4853,
+            "left": 495
+          },
+          "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "0.8px",
+          "color": "rgb(161, 161, 161)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "INTERACTION DESIGN03",
+        "box": {
+          "rect": {
+            "width": 929,
+            "height": 83,
+            "top": 4916,
+            "left": 495
+          },
+          "padding": "20px 0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 187,
+            "height": 22,
+            "top": 4936,
+            "left": 495
+          },
+          "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "0.8px",
+          "color": "rgb(161, 161, 161)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "BRAND EXPERIENCES04",
+        "box": {
+          "rect": {
+            "width": 929,
+            "height": 83,
+            "top": 4998,
+            "left": 495
+          },
+          "padding": "20px 0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 177,
+            "height": 22,
+            "top": 5018,
+            "left": 495
+          },
+          "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "0.8px",
+          "color": "rgb(161, 161, 161)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "CREATIVE DIRECTION05",
+        "box": {
+          "rect": {
+            "width": 929,
+            "height": 83,
+            "top": 5081,
+            "left": 495
+          },
+          "padding": "20px 0px",
+          "margin": "0px",
+          "gap": "normal",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "normal",
+          "alignItems": "normal",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "border": "0px none rgb(255, 255, 255)",
+          "borderRadius": "0px"
+        },
+        "titleText": {
+          "rect": {
+            "width": 187,
+            "height": 22,
+            "top": 5101,
+            "left": 495
+          },
+          "fontFamily": "\"Roboto Mono\", \"Roboto Mono Placeholder\", monospace",
+          "fontSize": "16px",
+          "fontWeight": "400",
+          "lineHeight": "normal",
+          "letterSpacing": "0.8px",
+          "color": "rgb(161, 161, 161)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      }
+    ]
+  },
+  "awards": {
+    "section": {
+      "rect": {
+        "width": 1440,
+        "height": 624,
+        "top": 5212,
+        "left": 0
+      },
+      "padding": "48px 0px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "block",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "normal",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "heading": {
+      "rect": {
+        "width": 650,
+        "height": 72,
+        "top": 5260,
+        "left": 16
+      },
+      "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+      "fontSize": "60px",
+      "fontWeight": "400",
+      "lineHeight": "72px",
+      "letterSpacing": "normal",
+      "color": "rgb(255, 255, 255)",
+      "textAlign": "start",
+      "textTransform": "none"
+    },
+    "headerRow": {
+      "rect": {
+        "width": 986,
+        "height": 47,
+        "top": 5380,
+        "left": 438
+      },
+      "padding": "0px 0px 16px",
+      "margin": "0px",
+      "gap": "24px",
+      "display": "grid",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "baseline",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "",
+      "borderRadius": "0px"
+    },
+    "rowsCount": 6,
+    "sampleRow": {
+      "rect": {
+        "width": 986,
+        "height": 60,
+        "top": 5427,
+        "left": 438
+      },
+      "padding": "20px 0px",
+      "margin": "0px",
+      "gap": "24px",
+      "display": "grid",
+      "flexDirection": "row",
+      "justifyContent": "normal",
+      "alignItems": "baseline",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "",
+      "borderRadius": "0px"
+    }
+  },
+  "stats": {
+    "container": {
+      "rect": {
+        "width": 986,
+        "height": 155,
+        "top": 5884,
+        "left": 438
+      },
+      "padding": "0px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "alignItems": "flex-start",
+      "backgroundColor": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "items": [
+      {
+        "rect": {
+          "width": 177,
+          "height": 155,
+          "top": 5884,
+          "left": 438
+        },
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "normal",
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(255, 255, 255)",
+        "borderRadius": "0px"
+      },
+      {
+        "rect": {
+          "width": 173,
+          "height": 155,
+          "top": 5884,
+          "left": 842
+        },
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "normal",
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(255, 255, 255)",
+        "borderRadius": "0px"
+      },
+      {
+        "rect": {
+          "width": 182,
+          "height": 155,
+          "top": 5884,
+          "left": 1242
+        },
+        "padding": "0px",
+        "margin": "0px",
+        "gap": "normal",
+        "display": "flex",
+        "flexDirection": "column",
+        "justifyContent": "normal",
+        "alignItems": "normal",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "border": "0px none rgb(255, 255, 255)",
+        "borderRadius": "0px"
+      }
+    ]
+  },
+  "footer": {
+    "section": {
+      "rect": {
+        "width": 1440,
+        "height": 634,
+        "top": 266,
+        "left": 0
+      },
+      "padding": "48px 16px 24px",
+      "margin": "0px",
+      "gap": "normal",
+      "display": "flex",
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+      "alignItems": "normal",
+      "backgroundColor": "rgb(0, 0, 0)",
+      "border": "0px none rgb(255, 255, 255)",
+      "borderRadius": "0px"
+    },
+    "links": [
+      {
+        "text": "WORK",
+        "style": {
+          "rect": {
+            "width": 88,
+            "height": 40,
+            "top": 491,
+            "left": 676
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "32px",
+          "fontWeight": "400",
+          "lineHeight": "38.4px",
+          "letterSpacing": "0.64px",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "uppercase"
+        }
+      },
+      {
+        "text": "ABOUT",
+        "style": {
+          "rect": {
+            "width": 97,
+            "height": 40,
+            "top": 547,
+            "left": 672
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "32px",
+          "fontWeight": "400",
+          "lineHeight": "38.4px",
+          "letterSpacing": "0.64px",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "uppercase"
+        }
+      },
+      {
+        "text": "CONTACT US",
+        "style": {
+          "rect": {
+            "width": 178,
+            "height": 40,
+            "top": 604,
+            "left": 631
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "32px",
+          "fontWeight": "400",
+          "lineHeight": "38.4px",
+          "letterSpacing": "0.64px",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "uppercase"
+        }
+      }
+    ],
+    "socials": [
+      {
+        "text": "IG",
+        "style": {
+          "rect": {
+            "width": 20,
+            "height": 28,
+            "top": 821,
+            "left": 32
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "X",
+        "style": {
+          "rect": {
+            "width": 13,
+            "height": 28,
+            "top": 821,
+            "left": 66
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "LI",
+        "style": {
+          "rect": {
+            "width": 17,
+            "height": 28,
+            "top": 821,
+            "left": 93
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      },
+      {
+        "text": "AW",
+        "style": {
+          "rect": {
+            "width": 31,
+            "height": 28,
+            "top": 821,
+            "left": 124
+          },
+          "fontFamily": "Gambarino, \"Gambarino Placeholder\", Georgia, serif",
+          "fontSize": "22px",
+          "fontWeight": "400",
+          "lineHeight": "26.4px",
+          "letterSpacing": "normal",
+          "color": "rgb(255, 255, 255)",
+          "textAlign": "start",
+          "textTransform": "none"
+        }
+      }
+    ]
+  }
+}
