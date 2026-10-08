@@ -51,85 +51,108 @@ export function ContactSection() {
 
       if (prefersReducedMotion) return;
 
-      // 1. Eyebrow
+      // 1. Eyebrow masked reveal
       if (eyebrowRef.current) {
         gsap.fromTo(
           eyebrowRef.current,
-          { y: 15, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: eyebrowRef.current,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none',
             },
           }
         );
       }
 
-      // 2. Main Heading masked reveal
+      // 2. Main Heading masked reveal with subtle parallax
       if (headingRef.current) {
         gsap.fromTo(
           headingRef.current,
-          { yPercent: 100, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
             yPercent: 0,
             opacity: 1,
-            duration: 1.1,
+            filter: 'blur(0px)',
+            duration: 0.95,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headingRef.current,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none',
             },
           }
         );
+
+        // Subtle scroll parallax
+        gsap.to(headingRef.current, {
+          y: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
       }
 
-      // 3. Subtext reveals slightly after heading
+      // 3. Subtext masked lines reveal
       if (subtextRef.current) {
+        const subtextLines = subtextRef.current.querySelectorAll('.contact-subtext-line');
         gsap.fromTo(
-          subtextRef.current,
-          { y: 24, opacity: 0 },
+          subtextLines,
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             duration: 0.85,
-            delay: 0.15,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: headingRef.current,
-              start: 'top 85%',
+              trigger: subtextRef.current,
+              start: 'top 88%',
               toggleActions: 'play none none none',
             },
           }
         );
       }
 
-      // 4. Contact Cards reveal upward one-by-one with clip-path stagger
+      // 4. Contact Cards reveal
       if (cardsRef.current) {
         const cards = cardsRef.current.querySelectorAll('.contact-option-card');
         gsap.fromTo(
           cards,
-          { y: 40, opacity: 0, clipPath: 'inset(18% 0% 0% 0%)' },
+          { y: 35, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 0.95,
-            stagger: 0.14,
+            duration: 0.8,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: cardsRef.current,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none',
             },
           }
         );
       }
+
+      const refreshTimer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 250);
+
+      return () => {
+        clearTimeout(refreshTimer);
+      };
     }, sectionRef);
 
     return () => ctx.revert();
@@ -158,19 +181,22 @@ export function ContactSection() {
             width: '100%',
           }}
         >
-          <span
-            ref={eyebrowRef}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '14px',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: 'var(--color-muted)',
-              marginBottom: '20px',
-            }}
-          >
-            GET IN TOUCH
-          </span>
+          <div style={{ overflow: 'hidden', marginBottom: '20px' }}>
+            <span
+              ref={eyebrowRef}
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '14px',
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                color: 'var(--color-muted)',
+                display: 'block',
+                willChange: 'transform, opacity, filter',
+              }}
+            >
+              GET IN TOUCH
+            </span>
+          </div>
 
           <div style={{ overflow: 'hidden', marginBottom: '24px' }}>
             <h2
@@ -184,6 +210,7 @@ export function ContactSection() {
                 textTransform: 'uppercase',
                 letterSpacing: '-0.01em',
                 margin: 0,
+                willChange: 'transform, opacity, filter',
               }}
             >
               LET&apos;S WORK TOGETHER
@@ -200,12 +227,29 @@ export function ContactSection() {
               marginBottom: '48px',
             }}
           >
-            <p style={{ margin: '0 0 8px' }}>
-              Have a project, business, brand, or idea in mind?
-            </p>
-            <p style={{ margin: 0, color: 'var(--color-white)' }}>
-              Let's build something great together.
-            </p>
+            <div style={{ overflow: 'hidden', marginBottom: '8px' }}>
+              <p
+                className="contact-subtext-line"
+                style={{
+                  margin: 0,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                Have a project, business, brand, or idea in mind?
+              </p>
+            </div>
+            <div style={{ overflow: 'hidden' }}>
+              <p
+                className="contact-subtext-line"
+                style={{
+                  margin: 0,
+                  color: 'var(--color-white)',
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                Let&apos;s build something great together.
+              </p>
+            </div>
           </div>
 
           {/* Three Premium Contact Options */}

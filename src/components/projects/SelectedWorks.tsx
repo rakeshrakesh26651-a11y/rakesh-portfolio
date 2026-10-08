@@ -29,37 +29,58 @@ export function SelectedWorks() {
     if (!headerRef.current) return;
 
     const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
       if (titleRef.current) {
         gsap.fromTo(
           titleRef.current,
-          { yPercent: 100, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
             yPercent: 0,
             opacity: 1,
-            duration: 1.0,
+            filter: 'blur(0px)',
+            duration: 0.95,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headerRef.current,
-              start: 'top 82%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
           }
         );
+
+        // Subtle scroll-linked parallax for heading
+        gsap.to(titleRef.current, {
+          y: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
       }
 
-      if (descRef.current) {
+      const descLines = descRef.current?.querySelectorAll('.works-desc-line');
+      if (descLines && descLines.length > 0) {
         gsap.fromTo(
-          descRef.current,
-          { y: 24, opacity: 0 },
+          descLines,
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
-            duration: 0.9,
-            delay: 0.15,
+            filter: 'blur(0px)',
+            duration: 0.85,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headerRef.current,
-              start: 'top 82%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
           }
@@ -99,26 +120,60 @@ export function SelectedWorks() {
               className="heading-section"
               style={{
                 margin: 0,
+                opacity: 0,
+                willChange: 'transform, opacity, filter',
               }}
             >
               Selected Works
             </h2>
           </div>
-          <p
+          <div
             ref={descRef}
             className="text-mono-base"
             style={{
               maxWidth: '520px',
               margin: 0,
-              lineHeight: 1.3,
+              lineHeight: 1.4,
             }}
           >
-            A collection of{' '}
-            <span style={{ color: 'var(--color-white)' }}>production websites</span>,{' '}
-            <span style={{ color: 'var(--color-white)' }}>e-commerce platforms</span> and{' '}
-            <span style={{ color: 'var(--color-white)' }}>digital brand experiences</span> built and deployed across my{' '}
-            <span style={{ color: 'var(--color-white)' }}>first year of development</span>.
-          </p>
+            <span style={{ display: 'block', overflow: 'hidden' }}>
+              <span
+                className="works-desc-line"
+                style={{
+                  display: 'block',
+                  opacity: 0,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                A collection of <span style={{ color: 'var(--color-white)' }}>production websites</span>,{' '}
+                <span style={{ color: 'var(--color-white)' }}>e-commerce platforms</span>
+              </span>
+            </span>
+            <span style={{ display: 'block', overflow: 'hidden' }}>
+              <span
+                className="works-desc-line"
+                style={{
+                  display: 'block',
+                  opacity: 0,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                and <span style={{ color: 'var(--color-white)' }}>digital brand experiences</span> built and deployed
+              </span>
+            </span>
+            <span style={{ display: 'block', overflow: 'hidden' }}>
+              <span
+                className="works-desc-line"
+                style={{
+                  display: 'block',
+                  opacity: 0,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                across my <span style={{ color: 'var(--color-white)' }}>first year of development</span>.
+              </span>
+            </span>
+          </div>
         </div>
 
         {/* Desktop Layout Rows */}

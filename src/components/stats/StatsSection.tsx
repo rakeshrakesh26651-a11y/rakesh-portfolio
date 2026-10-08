@@ -24,15 +24,16 @@ export function StatsSection() {
       if (prefersReducedMotion) return;
 
       const items = rowRef.current?.querySelectorAll('.stat-item');
-      if (items) {
+      if (items && items.length > 0) {
         gsap.fromTo(
           items,
-          { y: 32, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             duration: 0.85,
-            stagger: 0.12,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: rowRef.current,
@@ -61,13 +62,18 @@ export function StatsSection() {
         <div className="stats-content-wrapper">
           <div ref={rowRef} className="stats-row">
             {stats.map((stat, index) => (
-              <div key={`stat-${index}`} className="stat-item">
-                <RollingCounter
-                  targetValue={stat.targetValue}
-                  padZero={stat.padZero}
-                  suffix={stat.suffix}
-                  label={stat.label}
-                />
+              <div key={`stat-${index}`} style={{ overflow: 'hidden', width: '100%' }}>
+                <div
+                  className="stat-item"
+                  style={{ willChange: 'transform, opacity, filter' }}
+                >
+                  <RollingCounter
+                    targetValue={stat.targetValue}
+                    padZero={stat.padZero}
+                    suffix={stat.suffix}
+                    label={stat.label}
+                  />
+                </div>
               </div>
             ))}
           </div>

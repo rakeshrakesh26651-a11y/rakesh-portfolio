@@ -3,27 +3,16 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { portfolioData, socialLinks } from '@/data/portfolioData';
-import { MagneticLink } from '@/components/ui/MagneticLink';
+import { portfolioData } from '@/data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function Footer() {
-  const { footerNavigation, siteInfo } = portfolioData;
+  const { siteInfo } = portfolioData;
 
   const footerRef = useRef<HTMLElement>(null);
-  const navRef = useRef<HTMLDivElement>(null);
-  const brandTextRef = useRef<HTMLSpanElement>(null);
-  const roleRef = useRef<HTMLSpanElement>(null);
-  const bioRef = useRef<HTMLParagraphElement>(null);
-  const bottomRowRef = useRef<HTMLDivElement>(null);
-
-  const activeSocials = [
-    { label: 'Instagram', href: socialLinks.instagram },
-    { label: 'GitHub', href: socialLinks.github },
-    { label: 'LinkedIn', href: socialLinks.linkedin },
-    { label: 'WhatsApp', href: socialLinks.whatsapp },
-  ].filter((item) => Boolean(item.href && item.href.trim().length > 0));
+  const brandTextRef = useRef<HTMLHeadingElement>(null);
+  const copyrightRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     if (!footerRef.current) return;
@@ -37,107 +26,69 @@ export function Footer() {
 
       const isMobile = window.innerWidth <= 809.98;
 
-      // 1. Navigation links: masked upward reveal with stagger
-      if (navRef.current) {
-        const navLinks = navRef.current.querySelectorAll('.footer-nav-link');
+      // 1. Large Brand Text (RAKESH) Masked Reveal
+      if (brandTextRef.current) {
         gsap.fromTo(
-          navLinks,
+          brandTextRef.current,
           {
-            yPercent: 120,
+            yPercent: 110,
             opacity: 0,
+            filter: 'blur(4px)',
           },
           {
             yPercent: 0,
             opacity: 1,
-            duration: 0.9,
-            stagger: 0.08,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: navRef.current,
-              start: isMobile ? 'top 92%' : 'top 85%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      // 2. Large Brand Text (RAKESH):
-      // Horizontal cinematic movement across/into viewport scrubbed to scrolling
-      if (brandTextRef.current) {
-        const moveDistance = isMobile ? 45 : 85;
-        gsap.fromTo(
-          brandTextRef.current,
-          {
-            x: -moveDistance,
-            opacity: 0,
-            filter: 'blur(6px)',
-          },
-          {
-            x: 0,
-            opacity: 1,
             filter: 'blur(0px)',
-            ease: 'power2.out',
+            duration: 1.1,
+            ease: 'power4.out',
             scrollTrigger: {
               trigger: footerRef.current,
-              start: isMobile ? 'top 88%' : 'top 82%',
-              end: isMobile ? 'bottom 95%' : 'bottom 90%',
-              scrub: 1.2,
+              start: isMobile ? 'top 95%' : 'top 90%',
+              toggleActions: 'play none none none',
             },
           }
         );
+
+        // Subtle scroll-linked Y movement / parallax for huge heading
+        gsap.to(brandTextRef.current, {
+          y: -25,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: 'top bottom',
+            end: 'bottom bottom',
+            scrub: true,
+          },
+        });
       }
 
-      // 3. Role & Bio text reveal
-      if (roleRef.current && bioRef.current) {
+      // 2. Discreet Copyright Masked Reveal
+      if (copyrightRef.current) {
         gsap.fromTo(
-          [roleRef.current, bioRef.current],
+          copyrightRef.current,
           {
-            y: 20,
+            yPercent: 110,
             opacity: 0,
+            filter: 'blur(4px)',
           },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
-            duration: 0.85,
-            stagger: 0.1,
+            filter: 'blur(0px)',
+            duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: brandTextRef.current || footerRef.current,
-              start: 'top 80%',
+              trigger: footerRef.current,
+              start: isMobile ? 'top 90%' : 'top 85%',
               toggleActions: 'play none none none',
             },
           }
         );
       }
 
-      // 4. Bottom metadata & social links: reveal last
-      if (bottomRowRef.current) {
-        gsap.fromTo(
-          bottomRowRef.current,
-          {
-            y: 24,
-            opacity: 0,
-            clipPath: 'inset(20% 0% 0% 0%)',
-          },
-          {
-            y: 0,
-            opacity: 1,
-            clipPath: 'inset(0% 0% 0% 0%)',
-            duration: 0.85,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: bottomRowRef.current,
-              start: 'top 95%',
-              toggleActions: 'play none none none',
-            },
-          }
-        );
-      }
-
-      // Refresh ScrollTrigger coordinates after mounting to synchronize with Lenis
       const refreshTimer = setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 200);
+      }, 250);
 
       return () => {
         clearTimeout(refreshTimer);
@@ -149,143 +100,26 @@ export function Footer() {
 
   return (
     <footer id="footer" ref={footerRef} className="site-footer">
-      <div
-        className="site-container"
-        style={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          justifyContent: 'space-between',
-          flex: 1,
-        }}
-      >
-        {/* Centered Navigation Links with masked container */}
-        <div ref={navRef} className="footer-nav-menu">
-          {footerNavigation.map((link) => (
-            <div
-              key={link.label}
-              className="footer-nav-item"
-              style={{ overflow: 'hidden' }}
-            >
-              <MagneticLink
-                href={link.href}
-                className="footer-nav-link"
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontWeight: 400,
-                  color: 'var(--color-white)',
-                  letterSpacing: '0.02em',
-                  textTransform: 'uppercase',
-                  display: 'inline-block',
-                }}
-              >
-                {link.label}
-              </MagneticLink>
-            </div>
-          ))}
-        </div>
-
-        {/* Identity & Bio */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            gap: '8px',
-            marginBottom: '24px',
-            overflow: 'hidden',
-          }}
+      {/* Huge Editorial RAKESH Typography */}
+      <div className="footer-huge-brand-wrap">
+        <h2
+          ref={brandTextRef}
+          className="footer-huge-name"
         >
-          <div
-            style={{
-              overflow: 'hidden',
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <span
-              ref={brandTextRef}
-              style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(28px, 4vw, 44px)',
-                color: 'var(--color-white)',
-                letterSpacing: '0.05em',
-                display: 'inline-block',
-                willChange: 'transform, filter, opacity',
-              }}
-            >
-              {siteInfo.name}
-            </span>
-          </div>
-          <span
-            ref={roleRef}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '14px',
-              color: 'var(--color-secondary)',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              display: 'inline-block',
-            }}
-          >
-            {siteInfo.role}
-          </span>
+          {siteInfo.name}
+        </h2>
+      </div>
+
+      {/* Discreet bottom copyright */}
+      <div className="footer-bottom-bar">
+        <div style={{ overflow: 'hidden' }}>
           <p
-            ref={bioRef}
-            className="text-mono-sm"
-            style={{
-              color: 'var(--color-muted)',
-              maxWidth: '480px',
-              margin: '4px 0 0',
-              lineHeight: 1.4,
-            }}
+            ref={copyrightRef}
+            className="text-mono-sm copyright-text"
+            style={{ willChange: 'transform, opacity, filter' }}
           >
-            Building modern websites, web applications, and digital experiences.
+            {siteInfo.copyright}
           </p>
-        </div>
-
-        {/* Bottom Metadata & Socials */}
-        <div ref={bottomRowRef} className="footer-bottom-row">
-          {/* Left Column: Socials + Copyright */}
-          <div className="footer-left-col">
-            {activeSocials.length > 0 && (
-              <div className="footer-socials-row">
-                {activeSocials.map((social) => (
-                  <MagneticLink
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '14px',
-                      fontWeight: 400,
-                      color: 'var(--color-white)',
-                    }}
-                  >
-                    {social.label}
-                  </MagneticLink>
-                ))}
-              </div>
-            )}
-
-            <p className="text-mono-sm" style={{ color: 'var(--color-muted)', margin: 0 }}>
-              {siteInfo.copyright}
-            </p>
-          </div>
-
-          {/* Right Column: Credits */}
-          <div className="footer-right-col">
-            <span className="text-mono-sm">
-              Portfolio of{' '}
-              <span style={{ color: 'var(--color-white)' }}>
-                {siteInfo.creatorName}
-              </span>
-            </span>
-          </div>
         </div>
       </div>
 
@@ -294,81 +128,69 @@ export function Footer() {
           position: relative;
           z-index: 2;
           width: 100%;
-          min-height: 520px;
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
-          padding: 80px 16px 36px;
+          align-items: center;
+          justify-content: flex-end;
+          padding: 60px 16px 28px;
           background-color: transparent !important;
           overflow: hidden;
         }
 
-        .footer-nav-menu {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 16px;
-          margin-top: auto;
-          margin-bottom: auto;
-        }
-
-        :global(.footer-nav-link) {
-          font-size: 32px !important;
-          line-height: 38.4px !important;
-        }
-
-        .footer-bottom-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
+        .footer-huge-brand-wrap {
           width: 100%;
-        }
-
-        .footer-left-col {
           display: flex;
-          flex-direction: column;
-          gap: 12px;
-          align-items: flex-start;
-        }
-
-        .footer-socials-row {
-          display: flex;
-          gap: 18px;
+          justify-content: center;
           align-items: center;
+          overflow: hidden;
+          padding: 10px 0;
         }
 
-        .footer-right-col {
+        .footer-huge-name {
+          font-family: var(--font-serif);
+          font-size: clamp(76px, 19vw, 275px);
+          font-weight: 400;
+          line-height: 0.88;
+          letter-spacing: -0.02em;
+          text-align: center;
+          color: var(--color-white);
+          text-transform: uppercase;
+          margin: 0 auto;
+          width: 100%;
+          max-width: 100%;
+          white-space: nowrap;
+          user-select: none;
+          display: block;
+          will-change: transform, filter, opacity;
+        }
+
+        .footer-bottom-bar {
           display: flex;
-          gap: 24px;
+          justify-content: center;
           align-items: center;
+          width: 100%;
+          margin-top: 24px;
+        }
+
+        .copyright-text {
+          color: var(--color-muted);
+          margin: 0;
+          opacity: 0.5;
+          text-align: center;
         }
 
         @media (max-width: 809.98px) {
           .site-footer {
-            min-height: auto;
-            margin-top: -16px;
-            padding: 24px 16px 32px;
+            padding: 40px 12px 20px;
           }
 
-          .footer-nav-menu {
-            margin-top: 0;
-            margin-bottom: 24px;
+          .footer-huge-name {
+            font-size: clamp(70px, 18.5vw, 130px);
+            letter-spacing: -0.01em;
           }
 
-          :global(.footer-nav-link) {
-            font-size: 22px !important;
-            line-height: 26px !important;
-          }
-
-          .footer-bottom-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 20px;
-          }
-
-          .footer-right-col {
-            gap: 16px;
+          .footer-bottom-bar {
+            margin-top: 16px;
           }
         }
       `}</style>

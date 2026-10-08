@@ -19,7 +19,8 @@ export function ServiceItem({ number, title, description }: ServiceItemProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (!rowRef.current) return;
+    const rowEl = rowRef.current;
+    if (!rowEl) return;
 
     const ctx = gsap.context(() => {
       const prefersReducedMotion =
@@ -28,18 +29,20 @@ export function ServiceItem({ number, title, description }: ServiceItemProps) {
 
       if (prefersReducedMotion) return;
 
-      if (contentRef.current) {
+      const animLines = rowEl.querySelectorAll('.service-header-line, .service-desc-line');
+      if (animLines.length > 0) {
         gsap.fromTo(
-          contentRef.current.children,
-          { y: 20, opacity: 0 },
+          animLines,
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.1,
+            filter: 'blur(0px)',
+            duration: 0.85,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
-              trigger: rowRef.current,
+              trigger: rowEl,
               start: 'top 88%',
               toggleActions: 'play none none none',
             },
@@ -84,54 +87,63 @@ export function ServiceItem({ number, title, description }: ServiceItemProps) {
       }}
     >
       <div ref={contentRef} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'baseline',
-          width: '100%',
-        }}
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '18px',
-            fontWeight: 400,
-            color: isHovered ? 'var(--color-white)' : 'rgb(240, 240, 240)',
-            letterSpacing: '0.04em',
-            transition: 'color 0.3s ease',
-            textTransform: 'uppercase',
-          }}
-        >
-          {title}
-        </span>
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '16px',
-            fontWeight: 400,
-            color: 'var(--color-white)',
-            letterSpacing: '0.05em',
-          }}
-        >
-          {number}
-        </span>
-      </div>
+        {/* Top Header Line inside Line Mask */}
+        <div style={{ overflow: 'hidden', width: '100%' }}>
+          <div
+            className="service-header-line"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              width: '100%',
+              willChange: 'transform, opacity, filter',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '18px',
+                fontWeight: 400,
+                color: isHovered ? 'var(--color-white)' : 'rgb(240, 240, 240)',
+                letterSpacing: '0.04em',
+                transition: 'color 0.3s ease',
+                textTransform: 'uppercase',
+              }}
+            >
+              {title}
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '16px',
+                fontWeight: 400,
+                color: 'var(--color-white)',
+                letterSpacing: '0.05em',
+              }}
+            >
+              {number}
+            </span>
+          </div>
+        </div>
 
-      <p
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: '14px',
-          lineHeight: 1.5,
-          color: isHovered ? 'var(--color-secondary)' : 'var(--color-muted)',
-          marginTop: '10px',
-          marginBottom: 0,
-          maxWidth: '560px',
-          transition: 'color 0.3s ease',
-        }}
-      >
-        {description}
-      </p>
+        {/* Description Line inside Line Mask */}
+        <div style={{ overflow: 'hidden', width: '100%', marginTop: '10px' }}>
+          <p
+            className="service-desc-line"
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '14px',
+              lineHeight: 1.5,
+              color: isHovered ? 'var(--color-secondary)' : 'var(--color-muted)',
+              margin: 0,
+              maxWidth: '560px',
+              transition: 'color 0.3s ease',
+              willChange: 'transform, opacity, filter',
+            }}
+          >
+            {description}
+          </p>
+        </div>
       </div>
 
       {/* Static line separator */}

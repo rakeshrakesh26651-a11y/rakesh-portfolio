@@ -154,7 +154,7 @@ export const portfolioData = {
         'A modern luxury interior design website crafted with elegant editorial layouts, architectural aesthetics, and high-end project showcases.',
       year: '2026',
       image: '/images/projects/build-interior.jpg',
-      liveUrl: 'https://buildinterior-pr771yr3g-rakesh-8552.vercel.app/',
+      liveUrl: 'https://buildinterior.vercel.app/',
       speed: 85,
     },
   ] as ProjectItem[],

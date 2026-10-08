@@ -115,19 +115,21 @@ export function ProjectCard({
         }
       );
 
-      // 4. Staggered project metadata & description reveal
+      // 4. Staggered project metadata & description masked reveal
       if (textRef.current) {
-        const textItems = textRef.current.children;
+        const textLines = textRef.current.querySelectorAll('.project-card-text-line');
         gsap.fromTo(
-          textItems,
+          textLines,
           {
-            y: 20,
+            yPercent: 110,
             opacity: 0,
+            filter: 'blur(4px)',
           },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
-            duration: 0.8,
+            filter: 'blur(0px)',
+            duration: 0.85,
             stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
@@ -211,80 +213,104 @@ export function ProjectCard({
         ref={textRef}
         style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <h4
+        {/* Title & Year Line Mask */}
+        <div style={{ overflow: 'hidden', width: '100%' }}>
+          <div
+            className="project-card-text-line"
             style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(20px, 2vw, 24px)',
-              fontWeight: 400,
-              lineHeight: 1.2,
-              color: 'var(--color-white)',
-              letterSpacing: '0em',
-              margin: 0,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              willChange: 'transform, opacity, filter',
             }}
           >
-            {title}
-          </h4>
+            <h4
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(20px, 2vw, 24px)',
+                fontWeight: 400,
+                lineHeight: 1.2,
+                color: 'var(--color-white)',
+                letterSpacing: '0em',
+                margin: 0,
+              }}
+            >
+              {title}
+            </h4>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '13px',
+                color: 'var(--color-muted)',
+              }}
+            >
+              {year}
+            </span>
+          </div>
+        </div>
+
+        {/* Category Line Mask */}
+        <div style={{ overflow: 'hidden', width: '100%' }}>
           <span
+            className="project-card-text-line"
             style={{
+              display: 'block',
               fontFamily: 'var(--font-mono)',
               fontSize: '13px',
               color: 'var(--color-muted)',
+              letterSpacing: '0.04em',
+              textTransform: 'uppercase',
+              willChange: 'transform, opacity, filter',
             }}
           >
-            {year}
+            {category}
           </span>
         </div>
 
-        <span
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '13px',
-            color: 'var(--color-muted)',
-            letterSpacing: '0.04em',
-            textTransform: 'uppercase',
-          }}
-        >
-          {category}
-        </span>
-
-        <p
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '14px',
-            lineHeight: 1.45,
-            color: 'var(--color-secondary)',
-            margin: '4px 0 10px',
-          }}
-        >
-          {description}
-        </p>
-
-        {/* Project CTA Button / Link */}
-        <div>
-          <a
-            href={liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Description Line Mask */}
+        <div style={{ overflow: 'hidden', width: '100%' }}>
+          <p
+            className="project-card-text-line"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '14px',
-              color: isHovered ? 'var(--color-white)' : 'var(--color-secondary)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              textDecoration: 'none',
-              paddingBottom: '2px',
-              borderBottom: `1px solid ${isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.35)'}`,
-              transition: 'border-color 0.3s ease, color 0.3s ease',
-              cursor: 'pointer',
+              lineHeight: 1.45,
+              color: 'var(--color-secondary)',
+              margin: '4px 0 6px',
+              willChange: 'transform, opacity, filter',
             }}
           >
-            Visit Website
-            <span aria-hidden="true" style={{ fontSize: '12px' }}>
-              ↗
-            </span>
-          </a>
+            {description}
+          </p>
+        </div>
+
+        {/* Project CTA Button / Link Mask */}
+        <div style={{ overflow: 'hidden', width: '100%', marginTop: '4px' }}>
+          <div className="project-card-text-line" style={{ willChange: 'transform, opacity, filter' }}>
+            <a
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '14px',
+                color: isHovered ? 'var(--color-white)' : 'var(--color-secondary)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                textDecoration: 'none',
+                paddingBottom: '2px',
+                borderBottom: `1px solid ${isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.35)'}`,
+                transition: 'border-color 0.3s ease, color 0.3s ease',
+                cursor: 'pointer',
+              }}
+            >
+              Visit Website
+              <span aria-hidden="true" style={{ fontSize: '12px' }}>
+                ↗
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -34,98 +34,103 @@ export function Hero() {
         // Initial states
         if (titleRef.current) {
           gsap.set(titleRef.current, {
-            yPercent: 100,
-            y: 0,
+            yPercent: 110,
             opacity: 0,
-            filter: 'blur(6px)',
+            filter: 'blur(4px)',
           });
         }
         if (roleRef.current) {
           gsap.set(roleRef.current, {
-            y: 20,
+            yPercent: 110,
             opacity: 0,
+            filter: 'blur(4px)',
           });
         }
         gsap.set('.hero-desc-group', {
-          y: 20,
+          yPercent: 110,
           opacity: 0,
+          filter: 'blur(4px)',
         });
         gsap.set('.hero-cta-item', {
-          y: 16,
+          yPercent: 100,
           opacity: 0,
+          filter: 'blur(4px)',
         });
 
         // RAKESH: masked overflow-hidden reveal
-        // translateY(100%) -> 0, opacity 0 -> 1, blur(6px) -> 0, duration ~1.1s, ease: power4.out, delay ~0.2s
+        // translateY(110%) -> 0, opacity 0 -> 1, blur(4px) -> 0, duration ~1.1s, ease: power4.out
         if (titleRef.current) {
           tl.to(
             titleRef.current,
             {
               yPercent: 0,
-              y: 0,
               opacity: 1,
               filter: 'blur(0px)',
               duration: 1.1,
               ease: 'power4.out',
             },
-            baseDelay + 0.2
+            baseDelay + 0.15
           );
+
+          // Subtle scroll-linked parallax for large title
+          gsap.to(titleRef.current, {
+            y: 45,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          });
         }
 
-        // Subtitle: translateY(20px) -> 0, opacity 0 -> 1, delay ~0.6s
+        // Subtitle/Role: masked upward reveal
         if (roleRef.current) {
           tl.to(
             roleRef.current,
             {
-              y: 0,
+              yPercent: 0,
               opacity: 1,
-              duration: 0.8,
+              filter: 'blur(0px)',
+              duration: 0.85,
               ease: 'power3.out',
             },
-            baseDelay + 0.6
+            baseDelay + 0.5
           );
         }
 
-        // Description: line/group stagger reveal, translateY(20px) -> 0, opacity 0 -> 1
+        // Description: line-by-line masked stagger reveal
         const descGroups = descRef.current?.querySelectorAll('.hero-desc-group');
         if (descGroups && descGroups.length > 0) {
           tl.to(
             descGroups,
             {
-              y: 0,
+              yPercent: 0,
               opacity: 1,
-              duration: 0.8,
-              stagger: 0.12,
+              filter: 'blur(0px)',
+              duration: 0.85,
+              stagger: 0.08,
               ease: 'power3.out',
             },
-            baseDelay + 0.8
-          );
-        } else if (descRef.current) {
-          tl.to(
-            descRef.current,
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power3.out',
-            },
-            baseDelay + 0.8
+            baseDelay + 0.65
           );
         }
 
-        // CTAs: subtle translateY + fade, slight stagger
+        // CTAs: masked reveal
         const ctaItems = ctasRef.current?.querySelectorAll('.hero-cta-item');
         if (ctaItems && ctaItems.length > 0) {
           tl.to(
             ctaItems,
             {
-              y: 0,
+              yPercent: 0,
               opacity: 1,
-              duration: 0.7,
-              stagger: 0.12,
+              filter: 'blur(0px)',
+              duration: 0.75,
+              stagger: 0.08,
               ease: 'power3.out',
             },
-            baseDelay + 1.05
+            baseDelay + 0.95
           );
         }
       };
@@ -213,7 +218,7 @@ export function Hero() {
                 userSelect: 'none',
                 letterSpacing: '0em',
                 opacity: 0,
-                filter: 'blur(6px)',
+                filter: 'blur(4px)',
                 willChange: 'transform, opacity, filter',
               }}
             >
@@ -221,25 +226,28 @@ export function Hero() {
             </h1>
           </div>
 
-          <div
-            ref={roleRef}
-            className="hero-role"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(14px, 1.4vw, 18px)',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: 'var(--color-white)',
-              marginTop: '12px',
-              fontWeight: 500,
-              opacity: 0,
-              willChange: 'transform, opacity',
-            }}
-          >
-            {siteInfo.role}
+          {/* Masked Role Wrapper */}
+          <div style={{ overflow: 'hidden', marginTop: '12px' }}>
+            <div
+              ref={roleRef}
+              className="hero-role"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'clamp(14px, 1.4vw, 18px)',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: 'var(--color-white)',
+                fontWeight: 500,
+                opacity: 0,
+                willChange: 'transform, opacity, filter',
+              }}
+            >
+              {siteInfo.role}
+            </div>
           </div>
 
-          <p
+          {/* Masked Subtitle Lines */}
+          <div
             ref={descRef}
             className="hero-subtitle"
             style={{
@@ -255,29 +263,37 @@ export function Hero() {
             {taglineGroups.map((group, idx) => (
               <span
                 key={idx}
-                className="hero-desc-group"
+                className="hero-desc-line-mask"
                 style={{
-                  display: 'inline-block',
-                  opacity: 0,
-                  willChange: 'transform, opacity',
-                  marginRight: idx < taglineGroups.length - 1 ? '0.3em' : undefined,
+                  display: 'block',
+                  overflow: 'hidden',
+                  lineHeight: 1.5,
                 }}
               >
-                {group}
+                <span
+                  className="hero-desc-group"
+                  style={{
+                    display: 'block',
+                    opacity: 0,
+                    willChange: 'transform, opacity, filter',
+                  }}
+                >
+                  {group}
+                </span>
               </span>
             ))}
-          </p>
+          </div>
 
-          {/* Action CTAs */}
-          <div
-            ref={ctasRef}
-            className="hero-ctas"
-            style={{
-              display: 'flex',
-              gap: '28px',
-              marginTop: '24px',
-              alignItems: 'center',
-              justifyContent: 'center',
+          {/* Action CTAs Masked Wrapper */}
+          <div style={{ overflow: 'hidden', marginTop: '24px' }}>
+            <div
+              ref={ctasRef}
+              className="hero-ctas"
+              style={{
+                display: 'flex',
+                gap: '28px',
+                alignItems: 'center',
+                justifyContent: 'center',
             }}
           >
             <div
@@ -319,6 +335,7 @@ export function Hero() {
             </div>
           </div>
         </div>
+      </div>
 
         {/* 3D Showcase Carousel */}
         <div className="hero-carousel-wrapper" style={{ width: '100%', marginTop: '39px' }}>

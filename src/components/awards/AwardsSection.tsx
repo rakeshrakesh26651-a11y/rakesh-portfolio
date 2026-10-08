@@ -24,11 +24,12 @@ export function AwardsSection() {
       if (headingRef.current) {
         gsap.fromTo(
           headingRef.current,
-          { yPercent: 100, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
             yPercent: 0,
             opacity: 1,
-            duration: 1.0,
+            filter: 'blur(0px)',
+            duration: 0.95,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: headingRef.current,
@@ -37,18 +38,31 @@ export function AwardsSection() {
             },
           }
         );
+
+        // Subtle scroll parallax
+        gsap.to(headingRef.current, {
+          y: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
       }
 
       if (tableRef.current) {
-        const rows = tableRef.current.querySelectorAll('.award-body-row');
+        const rows = tableRef.current.querySelectorAll('.awards-header-row, .award-body-row');
         gsap.fromTo(
           rows,
-          { y: 22, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.1,
+            filter: 'blur(0px)',
+            duration: 0.85,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: tableRef.current,
@@ -82,6 +96,7 @@ export function AwardsSection() {
             style={{
               margin: 0,
               maxWidth: '650px',
+              willChange: 'transform, opacity, filter',
             }}
           >
             Why Work With Me
@@ -90,58 +105,67 @@ export function AwardsSection() {
 
         {/* Content Wrapper (70% width on right) matching Patrick Jane layout */}
         <div ref={tableRef} className="awards-content-wrapper">
-          {/* Table Header */}
-          <div
-            className="awards-grid-row awards-header-row"
-            style={{
-              paddingBottom: '16px',
-              borderBottom: '1px solid var(--color-border)',
-            }}
-          >
-            <h5 className="award-col-year award-header-text">PILLAR</h5>
-            <h5 className="award-col-project award-header-text">TECH STACK</h5>
-            <h5 className="award-col-award award-header-text">VALUE &amp; IMPACT</h5>
+          {/* Table Header inside line mask */}
+          <div style={{ overflow: 'hidden', borderBottom: '1px solid var(--color-border)' }}>
+            <div
+              className="awards-grid-row awards-header-row"
+              style={{
+                paddingBottom: '16px',
+                willChange: 'transform, opacity, filter',
+              }}
+            >
+              <h5 className="award-col-year award-header-text">PILLAR</h5>
+              <h5 className="award-col-project award-header-text">TECH STACK</h5>
+              <h5 className="award-col-award award-header-text">VALUE &amp; IMPACT</h5>
+            </div>
           </div>
 
           {/* Table Body */}
           {techAndWhy.map((item, index) => (
             <div
               key={`tech-${index}`}
-              className="awards-grid-row award-body-row"
               style={{
-                paddingTop: '20px',
-                paddingBottom: '20px',
+                overflow: 'hidden',
                 borderBottom: '1px solid var(--color-border-subtle)',
               }}
             >
-              <span
-                className="award-col-year text-mono-base"
+              <div
+                className="awards-grid-row award-body-row"
                 style={{
-                  fontWeight: 500,
-                  color: 'var(--color-white)',
-                  letterSpacing: '0.02em',
+                  paddingTop: '20px',
+                  paddingBottom: '20px',
+                  willChange: 'transform, opacity, filter',
                 }}
               >
-                {item.pillar}
-              </span>
-              <span
-                className="award-col-project text-mono-base"
-                style={{
-                  color: 'rgb(210, 210, 210)',
-                  lineHeight: 1.4,
-                }}
-              >
-                {item.technologies}
-              </span>
-              <span
-                className="award-col-award text-mono-base"
-                style={{
-                  color: 'var(--color-muted)',
-                  lineHeight: 1.4,
-                }}
-              >
-                {item.value}
-              </span>
+                <span
+                  className="award-col-year text-mono-base"
+                  style={{
+                    fontWeight: 500,
+                    color: 'var(--color-white)',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  {item.pillar}
+                </span>
+                <span
+                  className="award-col-project text-mono-base"
+                  style={{
+                    color: 'rgb(210, 210, 210)',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {item.technologies}
+                </span>
+                <span
+                  className="award-col-award text-mono-base"
+                  style={{
+                    color: 'var(--color-muted)',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {item.value}
+                </span>
+              </div>
             </div>
           ))}
         </div>

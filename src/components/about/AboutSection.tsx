@@ -27,13 +27,15 @@ export function AboutSection() {
       if (prefersReducedMotion) return;
 
       // 1. Eyebrow reveal
+      // 1. Eyebrow masked reveal
       if (eyebrowRef.current) {
         gsap.fromTo(
           eyebrowRef.current,
-          { y: 15, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             duration: 0.8,
             ease: 'power3.out',
             scrollTrigger: {
@@ -45,28 +47,42 @@ export function AboutSection() {
         );
       }
 
-      // 2. Statement lines masked reveal
+      // 2. Statement lines masked reveal with subtle parallax
       if (statementRef.current) {
         const lines = statementRef.current.querySelectorAll('.statement-line');
         gsap.fromTo(
           lines,
           {
-            yPercent: 100,
+            yPercent: 110,
             opacity: 0,
+            filter: 'blur(4px)',
           },
           {
             yPercent: 0,
             opacity: 1,
-            duration: 1.0,
-            stagger: 0.12,
+            filter: 'blur(0px)',
+            duration: 0.95,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: statementRef.current,
-              start: 'top 82%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
           }
         );
+
+        // Subtle scroll-linked parallax on statement
+        gsap.to(statementRef.current, {
+          y: -25,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: statementRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
       }
 
       // 3. Portrait image masked reveal + scroll parallax scrub
@@ -107,21 +123,22 @@ export function AboutSection() {
         );
       }
 
-      // 4. Narrative column paragraphs & CTA stagger reveal
+      // 4. Narrative column paragraphs & CTA masked stagger reveal
       if (narrativeRef.current) {
         const paragraphs = narrativeRef.current.querySelectorAll('.about-paragraph, .about-cta');
         gsap.fromTo(
           paragraphs,
-          { y: 24, opacity: 0 },
+          { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
           {
-            y: 0,
+            yPercent: 0,
             opacity: 1,
+            filter: 'blur(0px)',
             duration: 0.85,
-            stagger: 0.15,
+            stagger: 0.08,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: narrativeRef.current,
-              start: 'top 82%',
+              start: 'top 85%',
               toggleActions: 'play none none none',
             },
           }
@@ -144,18 +161,21 @@ export function AboutSection() {
     >
       <div className="site-container">
         {/* Section Eyebrow */}
-        <div ref={eyebrowRef} style={{ marginBottom: '24px' }}>
-          <span
+        <div style={{ marginBottom: '24px', overflow: 'hidden' }}>
+          <div
+            ref={eyebrowRef}
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '14px',
               letterSpacing: '0.15em',
               textTransform: 'uppercase',
               color: 'var(--color-muted)',
+              opacity: 0,
+              willChange: 'transform, opacity, filter',
             }}
           >
             {about.eyebrow}
-          </span>
+          </div>
         </div>
 
         {/* Editorial statement headline with GSAP reveal */}
@@ -232,78 +252,89 @@ export function AboutSection() {
           {/* Narrative Column */}
           <div ref={narrativeRef} className="about-narrative-column">
             {/* Paragraph 1 */}
-            <p
-              className="text-mono-base about-paragraph"
-              style={{
-                lineHeight: 1.4,
-                marginBottom: '28px',
-              }}
-            >
-              {about.paragraph1Words.map((chunk, idx) => (
-                <span
-                  key={`p1-${idx}`}
-                  style={{
-                    color: chunk.highlight ? 'var(--color-white)' : 'var(--color-muted)',
-                  }}
-                >
-                  {chunk.text}
-                </span>
-              ))}
-            </p>
-
-            {/* Paragraph 2 */}
-            <p
-              className="text-mono-base about-paragraph"
-              style={{
-                lineHeight: 1.4,
-                marginBottom: '28px',
-              }}
-            >
-              {about.paragraph2Words.map((chunk, idx) => (
-                <span
-                  key={`p2-${idx}`}
-                  style={{
-                    color: chunk.highlight ? 'var(--color-white)' : 'var(--color-muted)',
-                  }}
-                >
-                  {chunk.text}
-                </span>
-              ))}
-            </p>
-
-            {/* Paragraph 3 */}
-            <p
-              className="text-mono-base about-paragraph"
-              style={{
-                lineHeight: 1.4,
-                marginBottom: '40px',
-              }}
-            >
-              {about.paragraph3Words.map((chunk, idx) => (
-                <span
-                  key={`p3-${idx}`}
-                  style={{
-                    color: chunk.highlight ? 'var(--color-white)' : 'var(--color-muted)',
-                  }}
-                >
-                  {chunk.text}
-                </span>
-              ))}
-            </p>
-
-            {/* Let's Talk CTA */}
-            <div>
-              <MagneticLink
-                href={about.buttonLink}
+            <div style={{ overflow: 'hidden', marginBottom: '28px' }}>
+              <p
+                className="text-mono-base about-paragraph"
                 style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '16px',
-                  fontWeight: 500,
-                  color: 'var(--color-white)',
+                  lineHeight: 1.4,
+                  margin: 0,
+                  willChange: 'transform, opacity, filter',
                 }}
               >
-                {about.buttonText}
-              </MagneticLink>
+                {about.paragraph1Words.map((chunk, idx) => (
+                  <span
+                    key={`p1-${idx}`}
+                    style={{
+                      color: chunk.highlight ? 'var(--color-white)' : 'var(--color-muted)',
+                    }}
+                  >
+                    {chunk.text}
+                  </span>
+                ))}
+              </p>
+            </div>
+
+            {/* Paragraph 2 */}
+            <div style={{ overflow: 'hidden', marginBottom: '28px' }}>
+              <p
+                className="text-mono-base about-paragraph"
+                style={{
+                  lineHeight: 1.4,
+                  margin: 0,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                {about.paragraph2Words.map((chunk, idx) => (
+                  <span
+                    key={`p2-${idx}`}
+                    style={{
+                      color: chunk.highlight ? 'var(--color-white)' : 'var(--color-muted)',
+                    }}
+                  >
+                    {chunk.text}
+                  </span>
+                ))}
+              </p>
+            </div>
+
+            {/* Paragraph 3 */}
+            <div style={{ overflow: 'hidden', marginBottom: '40px' }}>
+              <p
+                className="text-mono-base about-paragraph"
+                style={{
+                  lineHeight: 1.4,
+                  margin: 0,
+                  willChange: 'transform, opacity, filter',
+                }}
+              >
+                {about.paragraph3Words.map((chunk, idx) => (
+                  <span
+                    key={`p3-${idx}`}
+                    style={{
+                      color: chunk.highlight ? 'var(--color-white)' : 'var(--color-muted)',
+                    }}
+                  >
+                    {chunk.text}
+                  </span>
+                ))}
+              </p>
+            </div>
+
+            {/* Let's Talk CTA */}
+            <div style={{ overflow: 'hidden' }}>
+              <div className="about-cta" style={{ willChange: 'transform, opacity, filter' }}>
+                <MagneticLink
+                  href={about.buttonLink}
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '16px',
+                    fontWeight: 500,
+                    color: 'var(--color-white)',
+                  }}
+                >
+                  {about.buttonText}
+                </MagneticLink>
+              </div>
             </div>
           </div>
         </div>

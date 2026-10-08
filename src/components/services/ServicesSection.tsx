@@ -25,11 +25,12 @@ export function ServicesSection() {
 
       gsap.fromTo(
         headingRef.current,
-        { yPercent: 100, opacity: 0 },
+        { yPercent: 110, opacity: 0, filter: 'blur(4px)' },
         {
           yPercent: 0,
           opacity: 1,
-          duration: 1.0,
+          filter: 'blur(0px)',
+          duration: 0.95,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headingRef.current,
@@ -38,6 +39,18 @@ export function ServicesSection() {
           },
         }
       );
+
+      // Subtle scroll-linked parallax on section heading
+      gsap.to(headingRef.current, {
+        y: -20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
     }, sectionRef);
 
     return () => ctx.revert();

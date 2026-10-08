@@ -140,17 +140,19 @@ export function RollingCounter({
       </div>
 
       {/* Label */}
-      <p
-        className="text-mono-base"
-        style={{
-          marginTop: '16px',
-          color: 'var(--color-muted)',
-          lineHeight: 1.2,
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {label}
-      </p>
+      <div style={{ overflow: 'hidden', width: '100%', marginTop: '16px' }}>
+        <p
+          className="text-mono-base"
+          style={{
+            margin: 0,
+            color: 'var(--color-muted)',
+            lineHeight: 1.2,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {label}
+        </p>
+      </div>
     </div>
   );
 }
