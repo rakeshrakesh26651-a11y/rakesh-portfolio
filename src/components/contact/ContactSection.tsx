@@ -5,12 +5,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-export const contactLinks = {
-  whatsapp: 'https://wa.me/919739090490',
-  instagram: 'https://instagram.com/_rakesh_2005',
-  email: 'mailto:rakeshrakesh26651@gmail.com',
-};
+import { contactLinks } from '@/data/portfolioData';
+export { contactLinks };
 
 const contactOptions = [
   {

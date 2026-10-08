@@ -33,8 +33,12 @@ export interface NavLink {
   href: string;
 }
 
+const whatsappPrefilledMessage = encodeURIComponent(
+  "Hi Rakesh! I'm looking for a professional website for my business. I'd like to discuss my requirements, the services you offer, pricing, and timeline. Could you help me with this?"
+);
+
 export const contactLinks = {
-  whatsapp: "https://wa.me/919739090490",
+  whatsapp: `https://wa.me/919739080490?text=${whatsappPrefilledMessage}`,
   instagram: "https://instagram.com/_rakesh_2005",
   email: "mailto:rakeshrakesh26651@gmail.com",
 };
