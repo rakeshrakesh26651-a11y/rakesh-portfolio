@@ -14,46 +14,115 @@ export function AboutSection() {
   const statementRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
+  const eyebrowRef = useRef<HTMLDivElement>(null);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
+  const narrativeRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    if (!statementRef.current) return;
-
-    const lines = statementRef.current.querySelectorAll('.statement-line');
-
     const ctx = gsap.context(() => {
-      // Reveal statement lines with cubic-bezier ease matching original
-      gsap.fromTo(
-        lines,
-        {
-          yPercent: 100,
-          opacity: 0,
-        },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: 1.0,
-          stagger: 0.12,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: statementRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-      // Subtle parallax on portrait image
-      if (imageRef.current) {
+      if (prefersReducedMotion) return;
+
+      // 1. Eyebrow reveal
+      if (eyebrowRef.current) {
+        gsap.fromTo(
+          eyebrowRef.current,
+          { y: 15, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: eyebrowRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 2. Statement lines masked reveal
+      if (statementRef.current) {
+        const lines = statementRef.current.querySelectorAll('.statement-line');
+        gsap.fromTo(
+          lines,
+          {
+            yPercent: 100,
+            opacity: 0,
+          },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.0,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: statementRef.current,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 3. Portrait image masked reveal + scroll parallax scrub
+      if (imageContainerRef.current && imageRef.current) {
+        gsap.fromTo(
+          imageContainerRef.current,
+          {
+            clipPath: 'inset(12% 0% 12% 0%)',
+            opacity: 0.85,
+          },
+          {
+            clipPath: 'inset(0% 0% 0% 0%)',
+            opacity: 1,
+            duration: 1.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: imageContainerRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+
         gsap.fromTo(
           imageRef.current,
-          { yPercent: -5 },
+          { yPercent: -12, scale: 1.06 },
           {
-            yPercent: 5,
+            yPercent: 12,
+            scale: 1.0,
             ease: 'none',
             scrollTrigger: {
-              trigger: imageRef.current,
+              trigger: imageContainerRef.current,
               start: 'top bottom',
               end: 'bottom top',
               scrub: true,
+            },
+          }
+        );
+      }
+
+      // 4. Narrative column paragraphs & CTA stagger reveal
+      if (narrativeRef.current) {
+        const paragraphs = narrativeRef.current.querySelectorAll('.about-paragraph, .about-cta');
+        gsap.fromTo(
+          paragraphs,
+          { y: 24, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: narrativeRef.current,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
             },
           }
         );
@@ -75,7 +144,7 @@ export function AboutSection() {
     >
       <div className="site-container">
         {/* Section Eyebrow */}
-        <div style={{ marginBottom: '24px' }}>
+        <div ref={eyebrowRef} style={{ marginBottom: '24px' }}>
           <span
             style={{
               fontFamily: 'var(--font-mono)',
@@ -129,6 +198,7 @@ export function AboutSection() {
           {/* Portrait Column */}
           <div className="about-image-column">
             <div
+              ref={imageContainerRef}
               style={{
                 width: '100%',
                 maxWidth: '430px',
@@ -138,6 +208,7 @@ export function AboutSection() {
                 overflow: 'hidden',
                 backgroundColor: '#050505',
                 borderRadius: '2px',
+                willChange: 'clip-path, opacity',
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -147,18 +218,19 @@ export function AboutSection() {
                 alt="Rakesh portrait"
                 style={{
                   width: '100%',
-                  height: '110%',
+                  height: '120%',
                   objectFit: 'cover',
                   position: 'absolute',
-                  top: '-5%',
+                  top: '-10%',
                   left: 0,
+                  willChange: 'transform',
                 }}
               />
             </div>
           </div>
 
           {/* Narrative Column */}
-          <div className="about-narrative-column">
+          <div ref={narrativeRef} className="about-narrative-column">
             {/* Paragraph 1 */}
             <p
               className="text-mono-base about-paragraph"

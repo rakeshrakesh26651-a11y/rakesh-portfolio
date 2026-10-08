@@ -1,15 +1,56 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '@/data/portfolioData';
 import { RollingCounter } from './RollingCounter';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function StatsSection() {
   const { stats } = portfolioData;
+  const sectionRef = useRef<HTMLElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!rowRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      const items = rowRef.current?.querySelectorAll('.stat-item');
+      if (items) {
+        gsap.fromTo(
+          items,
+          { y: 32, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: rowRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="stats"
+      ref={sectionRef}
       className="stats-section"
       style={{
         width: '100%',
@@ -18,7 +59,7 @@ export function StatsSection() {
     >
       <div className="site-container">
         <div className="stats-content-wrapper">
-          <div className="stats-row">
+          <div ref={rowRef} className="stats-row">
             {stats.map((stat, index) => (
               <div key={`stat-${index}`} className="stat-item">
                 <RollingCounter

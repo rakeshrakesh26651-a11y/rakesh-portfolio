@@ -33,24 +33,78 @@ export function ProjectCard({
   speed = 80,
   className = '',
 }: ProjectCardProps) {
+  const cardRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current || !imageRef.current) return;
 
-    // Parallax scroll effect matching Patrick Jane implementation
-    const factor = (speed - 100) / 100;
-    const yStart = factor * 40;
-    const yEnd = -factor * 40;
-
     const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      // 1. Card-level differential translation on desktop
+      const isMobile = window.innerWidth <= 809.98;
+      if (!isMobile && cardRef.current) {
+        const differentialY = ((speed - 85) / 100) * 45;
+        if (Math.abs(differentialY) > 2) {
+          gsap.fromTo(
+            cardRef.current,
+            { y: differentialY },
+            {
+              y: -differentialY,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: cardRef.current,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.5,
+              },
+            }
+          );
+        }
+      }
+
+      // 2. Masked clip-path image reveal on viewport entry
+      gsap.fromTo(
+        containerRef.current,
+        {
+          clipPath: 'inset(10% 0% 10% 0%)',
+          opacity: 0.85,
+        },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          opacity: 1,
+          duration: 1.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 88%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+
+      // 3. Scroll-linked Parallax & Scale scrub
+      const factor = (speed - 100) / 100;
+      const yStart = -10 + factor * 22;
+      const yEnd = 10 - factor * 22;
+
       gsap.fromTo(
         imageRef.current,
-        { yPercent: yStart },
+        {
+          yPercent: yStart,
+          scale: 1.08,
+        },
         {
           yPercent: yEnd,
+          scale: 1.0,
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -60,7 +114,31 @@ export function ProjectCard({
           },
         }
       );
-    }, containerRef);
+
+      // 4. Staggered project metadata & description reveal
+      if (textRef.current) {
+        const textItems = textRef.current.children;
+        gsap.fromTo(
+          textItems,
+          {
+            y: 20,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.08,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: textRef.current,
+              start: 'top 90%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, cardRef);
 
     return () => ctx.revert();
   }, [speed]);
@@ -72,6 +150,7 @@ export function ProjectCard({
 
   return (
     <div
+      ref={cardRef}
       className={`project-card ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -80,6 +159,7 @@ export function ProjectCard({
         flexDirection: 'column',
         width: width,
         position: 'relative',
+        willChange: 'transform',
       }}
     >
       {/* Image container mask with parallax */}
@@ -94,6 +174,7 @@ export function ProjectCard({
           backgroundColor: '#050505',
           borderRadius: '2px',
           cursor: 'pointer',
+          willChange: 'clip-path, opacity',
         }}
         title={`Visit ${title}`}
       >
@@ -114,18 +195,22 @@ export function ProjectCard({
             alt={title}
             style={{
               width: '100%',
-              height: '115%',
+              height: '120%',
               position: 'absolute',
-              top: '-7.5%',
+              top: '-10%',
               left: 0,
               objectFit: 'cover',
+              willChange: 'transform',
             }}
           />
         </div>
       </div>
 
       {/* Project info & metadata */}
-      <div style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <div
+        ref={textRef}
+        style={{ marginTop: '20px', display: 'flex', flexDirection: 'column', gap: '8px' }}
+      >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
           <h4
             style={{

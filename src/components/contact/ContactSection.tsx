@@ -38,30 +38,97 @@ const contactOptions = [
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!contentRef.current) return;
-
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        contentRef.current,
-        {
-          opacity: 0,
-          y: 40,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.0,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-        }
-      );
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      // 1. Eyebrow
+      if (eyebrowRef.current) {
+        gsap.fromTo(
+          eyebrowRef.current,
+          { y: 15, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: eyebrowRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 2. Main Heading masked reveal
+      if (headingRef.current) {
+        gsap.fromTo(
+          headingRef.current,
+          { yPercent: 100, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.05,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 3. Subtext
+      if (subtextRef.current) {
+        gsap.fromTo(
+          subtextRef.current,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.85,
+            delay: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: subtextRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      // 4. Contact Cards stagger
+      if (cardsRef.current) {
+        const cards = cardsRef.current.querySelectorAll('.contact-option-card');
+        gsap.fromTo(
+          cards,
+          { y: 35, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -80,7 +147,6 @@ export function ContactSection() {
     >
       <div className="site-container">
         <div
-          ref={contentRef}
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -92,6 +158,7 @@ export function ContactSection() {
           }}
         >
           <span
+            ref={eyebrowRef}
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '14px',
@@ -104,22 +171,26 @@ export function ContactSection() {
             GET IN TOUCH
           </span>
 
-          <h2
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(38px, 5.5vw, 76px)',
-              fontWeight: 400,
-              lineHeight: 1.15,
-              color: 'var(--color-white)',
-              textTransform: 'uppercase',
-              letterSpacing: '-0.01em',
-              margin: '0 0 24px',
-            }}
-          >
-            LET'S WORK TOGETHER
-          </h2>
+          <div style={{ overflow: 'hidden', marginBottom: '24px' }}>
+            <h2
+              ref={headingRef}
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(38px, 5.5vw, 76px)',
+                fontWeight: 400,
+                lineHeight: 1.15,
+                color: 'var(--color-white)',
+                textTransform: 'uppercase',
+                letterSpacing: '-0.01em',
+                margin: 0,
+              }}
+            >
+              LET&apos;S WORK TOGETHER
+            </h2>
+          </div>
 
           <div
+            ref={subtextRef}
             className="text-mono-base"
             style={{
               maxWidth: '560px',
@@ -137,7 +208,7 @@ export function ContactSection() {
           </div>
 
           {/* Three Premium Contact Options */}
-          <div className="contact-options-grid">
+          <div ref={cardsRef} className="contact-options-grid">
             {contactOptions.map((option) => (
               <a
                 key={option.id}

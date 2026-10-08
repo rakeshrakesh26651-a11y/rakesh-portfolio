@@ -1,6 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface ServiceItemProps {
   number: string;
@@ -9,10 +13,64 @@ interface ServiceItemProps {
 }
 
 export function ServiceItem({ number, title, description }: ServiceItemProps) {
+  const rowRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (!rowRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      if (contentRef.current) {
+        gsap.fromTo(
+          contentRef.current.children,
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: rowRef.current,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      if (lineRef.current) {
+        gsap.fromTo(
+          lineRef.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 0.9,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: rowRef.current,
+              start: 'top 88%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, rowRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <div
+      ref={rowRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
@@ -25,6 +83,7 @@ export function ServiceItem({ number, title, description }: ServiceItemProps) {
         flexDirection: 'column',
       }}
     >
+      <div ref={contentRef} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
       <div
         style={{
           display: 'flex',
@@ -73,9 +132,11 @@ export function ServiceItem({ number, title, description }: ServiceItemProps) {
       >
         {description}
       </p>
+      </div>
 
       {/* Static line separator */}
       <div
+        ref={lineRef}
         style={{
           width: '100%',
           height: '1px',
@@ -83,6 +144,8 @@ export function ServiceItem({ number, title, description }: ServiceItemProps) {
           marginTop: '24px',
           position: 'relative',
           overflow: 'hidden',
+          transformOrigin: 'left',
+          willChange: 'transform',
         }}
       >
         {/* Animated highlight line on hover */}

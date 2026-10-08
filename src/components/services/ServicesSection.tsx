@@ -1,15 +1,52 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '@/data/portfolioData';
 import { ServiceItem } from './ServiceItem';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function ServicesSection() {
   const { services } = portfolioData;
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (!headingRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      gsap.fromTo(
+        headingRef.current,
+        { yPercent: 100, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.0,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="services"
+      ref={sectionRef}
       className="services-section"
       style={{
         width: '100%',
@@ -18,8 +55,9 @@ export function ServicesSection() {
     >
       <div className="site-container">
         {/* Section Heading */}
-        <div style={{ marginBottom: '48px' }}>
+        <div style={{ marginBottom: '48px', overflow: 'hidden' }}>
           <h2
+            ref={headingRef}
             className="heading-section"
             style={{
               textTransform: 'uppercase',

@@ -1,11 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '@/data/portfolioData';
 import { ProjectCard } from './ProjectCard';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function SelectedWorks() {
   const { projects } = portfolioData;
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
 
   const gustoCafe = projects.find((p) => p.id === 'gusto-cafe') || projects[0];
   const weddingCouple = projects.find((p) => p.id === 'wedding-couple') || projects[1];
@@ -14,10 +23,57 @@ export function SelectedWorks() {
   const nivyuga = projects.find((p) => p.id === 'nivyuga') || projects[4];
   const mysorePlant = projects.find((p) => p.id === 'mysore-plant') || projects[5];
   const himalayanHarvest = projects.find((p) => p.id === 'himalayan-harvest') || projects[6];
+  const buildInterior = projects.find((p) => p.id === 'build-interior') || projects[7];
+
+  useEffect(() => {
+    if (!headerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      if (titleRef.current) {
+        gsap.fromTo(
+          titleRef.current,
+          { yPercent: 100, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      if (descRef.current) {
+        gsap.fromTo(
+          descRef.current,
+          { y: 24, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            delay: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="work"
+      ref={sectionRef}
       className="works-section"
       style={{
         width: '100%',
@@ -27,6 +83,7 @@ export function SelectedWorks() {
       <div className="site-container">
         {/* Section Header */}
         <div
+          ref={headerRef}
           className="selected-works-header"
           style={{
             display: 'flex',
@@ -36,15 +93,19 @@ export function SelectedWorks() {
             gap: '24px',
           }}
         >
-          <h2
-            className="heading-section"
-            style={{
-              margin: 0,
-            }}
-          >
-            Selected Works
-          </h2>
+          <div style={{ overflow: 'hidden' }}>
+            <h2
+              ref={titleRef}
+              className="heading-section"
+              style={{
+                margin: 0,
+              }}
+            >
+              Selected Works
+            </h2>
+          </div>
           <p
+            ref={descRef}
             className="text-mono-base"
             style={{
               maxWidth: '520px',
@@ -98,6 +159,13 @@ export function SelectedWorks() {
               <ProjectCard {...himalayanHarvest} width="100%" />
             </div>
           </div>
+
+          {/* Row 5: Center 704px */}
+          <div className="project-row row-5">
+            <div className="card-center">
+              <ProjectCard {...buildInterior} width="100%" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -132,6 +200,10 @@ export function SelectedWorks() {
 
         .row-4 {
           justify-content: space-between;
+        }
+
+        .row-5 {
+          justify-content: center;
         }
 
         .card-small {

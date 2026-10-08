@@ -1,14 +1,72 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '@/data/portfolioData';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function AwardsSection() {
   const { techAndWhy } = portfolioData;
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const tableRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      if (headingRef.current) {
+        gsap.fromTo(
+          headingRef.current,
+          { yPercent: 100, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: 1.0,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: headingRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+
+      if (tableRef.current) {
+        const rows = tableRef.current.querySelectorAll('.award-body-row');
+        gsap.fromTo(
+          rows,
+          { y: 22, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: tableRef.current,
+              start: 'top 82%',
+              toggleActions: 'play none none none',
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="about-stack"
+      ref={sectionRef}
       className="awards-section"
       style={{
         width: '100%',
@@ -17,8 +75,9 @@ export function AwardsSection() {
     >
       <div className="site-container">
         {/* Section Heading */}
-        <div style={{ marginBottom: '48px' }}>
+        <div style={{ marginBottom: '48px', overflow: 'hidden' }}>
           <h2
+            ref={headingRef}
             className="heading-section"
             style={{
               margin: 0,
@@ -30,7 +89,7 @@ export function AwardsSection() {
         </div>
 
         {/* Content Wrapper (70% width on right) matching Patrick Jane layout */}
-        <div className="awards-content-wrapper">
+        <div ref={tableRef} className="awards-content-wrapper">
           {/* Table Header */}
           <div
             className="awards-grid-row awards-header-row"

@@ -78,7 +78,7 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/gusto-cafe.jpg',
       liveUrl: 'https://gusto-cafe-iota.vercel.app/',
-      speed: 80,
+      speed: 120,
     },
     {
       id: 'wedding-couple',
@@ -89,7 +89,7 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/wedding-couple.jpg',
       liveUrl: 'https://weddingcouple-five.vercel.app/',
-      speed: 80,
+      speed: 65,
     },
     {
       id: 'gym-fitness',
@@ -100,7 +100,7 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/gym-fitness.jpg',
       liveUrl: 'https://gymfitness-flame.vercel.app/',
-      speed: 80,
+      speed: 85,
     },
     {
       id: 'premium-jewellery',
@@ -111,7 +111,7 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/jewellery.jpg',
       liveUrl: 'https://jewellery-mauve-eta.vercel.app/',
-      speed: 80,
+      speed: 60,
     },
     {
       id: 'nivyuga',
@@ -122,7 +122,7 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/nivyuga.jpg',
       liveUrl: 'https://nivyuga.vercel.app/',
-      speed: 80,
+      speed: 130,
     },
     {
       id: 'mysore-plant',
@@ -133,7 +133,7 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/mysore-plant.jpg',
       liveUrl: 'https://mysoreplant.vercel.app/',
-      speed: 80,
+      speed: 125,
     },
     {
       id: 'himalayan-harvest',
@@ -144,7 +144,18 @@ export const portfolioData = {
       year: '2026',
       image: '/images/projects/himalayan-harvest.jpg',
       liveUrl: 'https://honey-navy-psi.vercel.app/',
-      speed: 80,
+      speed: 70,
+    },
+    {
+      id: 'build-interior',
+      title: 'Build Interior',
+      category: 'Interior Design',
+      description:
+        'A modern luxury interior design website crafted with elegant editorial layouts, architectural aesthetics, and high-end project showcases.',
+      year: '2026',
+      image: '/images/projects/build-interior.jpg',
+      liveUrl: 'https://buildinterior-pr771yr3g-rakesh-8552.vercel.app/',
+      speed: 85,
     },
   ] as ProjectItem[],
 

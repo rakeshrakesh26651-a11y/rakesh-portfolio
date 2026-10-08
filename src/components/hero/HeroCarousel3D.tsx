@@ -1,7 +1,11 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '@/data/portfolioData';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function HeroCarousel3D() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,6 +21,34 @@ export function HeroCarousel3D() {
   const images = portfolioData.heroCarousel;
   const cardCount = images.length;
   const radius = 286.2874; // exact pentagon apothem from reference site
+
+  // Scroll-linked depth scrub
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ctx = gsap.context(() => {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) return;
+
+      gsap.to(containerRef.current, {
+        scale: 0.92,
+        y: 40,
+        opacity: 0.85,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 50%',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   // Animation frame loop for continuous auto-rotation & momentum
   useEffect(() => {
